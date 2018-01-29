@@ -1,0 +1,222 @@
+simpler and cheap enough
+    aweber
+        http://www.aweber.com/pricing.htm
+single signon
+    there is some discussion of this on slack channel but main point is
+        170109
+        there is an auth channel on firebase slack
+        there is a 2 months dormant almost has everything on firebase
+            does NOT integrate with polyfire
+            still lacks email and social integration in one piece
+            otherwise seems waaay cool
+            https://beta.webcomponents.org/element/convoo/login-fire
+    facebook
+        https://developers.facebook.com/docs/facebook-login
+    google
+        don't I have an app already built?
+            yes see github/TTFHW
+Why not to do my own SMTP server
+        https://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/
+    first option 100 per hour maximum
+        dreamhost
+    vendors
+        https://sendgrid.com/marketing/sendgrid-services/
+        https://www.socketlabs.com/signup/
+python examples
+    https://docs.python.org/2/library/email-examples.html
+    http://naelshiab.com/tutorial-send-email-python/
+    http://www.pythonforbeginners.com/code-snippets-source-code/using-python-to-send-email
+    https://www.tutorialspoint.com/python/python_sending_email.htm
+    http://stackoverflow.com/questions/6270782/how-to-send-an-email-with-python
+how to create a clickable site
+    https://www.youtube.com/watch?v=mdp5uN2uYBU
+test video in pullmodel
+    https://youtu.be/CjeOVoUvMHM
+audio
+        ars-technica2020USB mic
+        pop filter
+        stand
+    and or
+        shotgun mic jeff
+lighting
+    softbox
+        https://www.amazon.com/Fancierstudio-Professional-Lighting-Hairlight-Photography/dp/B0047FHOWG/ref=sr_1_1?ie=UTF8&qid=1480797000&sr=8-1-spons&keywords=softbox+lighting+kit+for+video&psc=1
+scp example for camel devops
+    http://www.jcraft.com/jsch/examples/ScpTo.java.html
+broken link checking
+    search that worked: "javascript crawler that finds broken links"
+    or found
+        https://github.com/stevenvachon/broken-link-checker
+        https://www.npmjs.com/package/find-broken-links
+youtube links experiment
+    https://www.youtube.com/watch?v=dDcAHCyGkEA
+menu, mostly regarding contextual menu role
+    https://vaadin.com/elements/-/element/vaadin-context-menu
+    https://beta.webcomponents.org/element/PolymerElements/paper-menu/paper-submenu
+filters/steps/roles
+    uninformed
+    a
+    leaning in
+    ns customer
+    ns distributor
+    executive
+    jk leader
+initial spreadsheet
+    https://docs.google.com/spreadsheets/d/1ZZQ2KMrdX5aSYqo2XODeetJ7D40-nan3beyBVqwGE-w/edit#gid=0
+a b testing
+    this one is polymer!
+        http://blog.milkshake-island.com/post/122222114373/ab-testing-via-web-components
+    http://blog.brandfu.com/2012/02/rolling-your-own-ab-split-testing.html
+    http://ccm.net/faq/918-javascript-choosing-a-link-at-random
+menu hidden if no user
+    see polycast 57 at 11:35
+firebase java SDK
+    https://firebase.google.com/docs/admin/setup
+spider for checking sites and links
+    https://www.screamingfrog.co.uk/seo-spider/pricing/
+critical video on firebase syntax
+    https://www.youtube.com/watch?v=PUBnlbjZFAI
+email verification for email/password authorization
+    https://groups.google.com/forum/#!topic/firebase-talk/u7iipFhXVxg
+redirect possibilities?
+    https://github.com/PolymerElements/iron-location/blob/master/test/redirection.html
+    https://visionmedia.github.io/page.js/
+        from https://github.com/PolymerElements/polymer-starter-kit/issues/409
+    you can probably figure out a lot from this
+        https://github.com/PolymerElements/iron-location/blob/master/iron-location.html
+for code snippets in atom
+    https://www.youtube.com/watch?v=x78SQlvK8Vk
+how to make your own icon set
+    https://www.youtube.com/watch?v=tjmRUgUca1g
+fix for polymerfire problem firebase.js - Build permanently fails once I add any polymerfire element into the app
+    https://github.com/Polymer/polymer-cli/issues/373
+    https://github.com/Polymer/polymer-cli/issues/369
+    think you have to add polymer.json file whatevever the heck that is
+rich text editor
+    https://github.com/chuckh/polymer-quill
+firebase query video - hard to watch but helpful
+    https://www.youtube.com/watch?v=oYhIhEVmXXw
+firebase pagination
+    http://stackoverflow.com/questions/37711220/firebase-android-pagination
+functions as state
+    something.other.whatever
+    looked up by relative directory
+dom as state
+    behaviors as state within dom
+live inside chrome dev tools
+snippets inside atom
+atom tips to learn
+    https://www.youtube.com/watch?v=UYPgPyxwF28
+multi clipboard
+    https://www.youtube.com/watch?v=s2LwFa6F_Wc
+things you should be able to do on command
+    create a polymer page
+    create a polymer element
+    create a new function
+    create an element within an element within and element
+    bower install anything
+    create a bowerc file that changes location of bower
+    create a single and multi page app within same app
+    install firebase auth without looking at video
+    install firebase database connection without looking at video
+    create a polymer script with each type of property
+    each type of polymer construct from dom-if to repeat to [[]] and {{}}
+    [[]] and {{}} which is one way and which is up and down
+    how to do a hidden attribute
+    put in an .htaccess to make https only
+how to parse a query string incoming page
+    https://www.polymer-project.org/1.0/toolbox/routing
+    https://www.webcomponents.org/element/PolymerElements/iron-location
+    https://www.webcomponents.org/element/PolymerElements/iron-location/iron-query-params
+    http://stackoverflow.com/questions/40668826/how-to-get-query-string-in-polymer
+    http://stackoverflow.com/questions/35279904/how-to-use-a-query-string-at-polymer-1-0
+    https://davidwalsh.name/query-string-javascript
+    http://www.fetchdesigns.com/blog/url-query-string-javascript-jquery/
+xml parsing with jackson
+    not sure that I would ever need this
+
+COOKIES
+    https://stackoverflow.com/questions/36583865/iron-ajax-trying-to-send-session-cookie-in-the-header-of-get-request/36585350#36585350
+    or this
+    http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_var_get
+    and this
+    http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_doc_cookie
+    and this
+    https://github.com/js-cookie/js-cookie/
+    https://msdn.microsoft.com/en-us/library/ms970178.aspx
+    http://stackoverflow.com/questions/22135095/polymer-element-with-javascript-dependencies if you want to use the cookie.js elsewhere for deduplication -->
+    ended up having to use this because the bower version didn't work in my chrome browser
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.min.js"></script>
+RICH EDITOR
+    image size reduction
+        http://stackoverflow.com/questions/23945494/use-html5-to-resize-an-image-before-upload
+        https://tinypng.com/
+    polymer-quill   https://github.com/chuckh/polymer-quill
+    the easy workaround for the image file size:
+        limit the total content bits to a certain size
+        once that size is reached, disable the save and tell the user why
+    bower install https://github.com/chuckh/polymer-quill.git#^0.8.1 --save,
+HTML if I really want to understand polymer, first I must understand html
+    http://www.w3schools.com/html/default.asp
+Button that looks like a link for post info
+    http://jsfiddle.net/SkQRN/
+possible resources for css/html design on .info pages
+    dreamhost remixer
+    w3schools
+    quill
+        experiment
+        study http://cdn.quilljs.com/1.2.0/quill.snow.css
+    play with intellij
+    try downloading various css files and studying them
+    use inline css and keep it simple
+Internal CSS for emails
+    http://www.w3schools.com/html/html_css.asp
+SERVICE WORKER
+    most helpful code watching video
+        https://www.youtube.com/watch?v=cmGr0RszHc8
+    polycast intro
+        https://www.youtube.com/watch?v=BucGrYACJdQ
+    first free course you might wish to take
+        https://jakearchibald.com/2014/offline-cookbook/
+    IDB database which archibald says you will need
+        https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase
+8 STEP VSL FORMULA
+    pi Module 5, third item in menu, #3 VSL in that item, 1 minute in
+email situation notes
+	https://commons.apache.org/proper/commons-email/userguide.html
+    css guide for email https://www.topicmonitor.com/css/
+    <style> tag with body
+    per socketlabs 128k max
+    commons-email guide http://commons.apache.org/proper/commons-email/userguide.html
+    set the "from" domain in socketlabs console. Currently there is
+        @datafundamentals
+        @clouddancer.info
+        @clouddancer.co
+    there is a 128k maximum on emails from socket labs.
+        Thus the editor needs to be set up to cap it off and prevent same
+    WHAT BEST TIME TO SEND EMAIL
+        http://optinmonster.com/the-best-time-to-send-emails-heres-what-studies-show/
+CRON/QUARTZ triggers - find on '*'
+    https://crontab.guru/every-thursday
+    https://examples.javacodegeeks.com/enterprise-java/quartz/quartz-scheduler-tutorial/
+    http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/crontrigger.html
+EMAIL YOU CAN USE
+    pete@clouddancer.co
+    lead@appwriter.com
+    madmin@appwriter.com
+    mary@appwriter.com
+    pete@appwriter.com
+    tammy@appwriter.com
+    peter@betterology.com
+JAVA SIDE HTML CONVERSION
+	https://jsoup.org/cookbook/input/parse-document-from-string
+	http://stackoverflow.com/questions/1699313/how-to-remove-html-tag-in-java
+	http://stackoverflow.com/questions/3607965/how-to-convert-html-text-to-plain-text
+JS CLIENT SIDE HTML CONVERSION
+	http://stackoverflow.com/questions/32469266/can-i-use-jquery-within-my-custom-polymer-elements
+	http://jsbin.com/purudu/edit?html,output
+	google html to text converter javascript
+websockets????
+    searching on websocket is a pretty rich trove, for example
+        https://www.html5rocks.com/en/tutorials/websockets/basics/
+    https://github.com/wburgers/websocket-component

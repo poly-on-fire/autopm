@@ -1,0 +1,77 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/app-route/app-location.html">
+<link rel="import" href="/bower_components/app-route/app-route.html">
+<link rel="import" href="/bower_components/iron-form/iron-form.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="/bower_components/paper-styles/paper-styles.html">
+
+<dom-module id="to-z${headers.fileKey}e">
+  <template>
+    <style include="shared-styles">
+      :host {
+        --app-primary-color: #4285f4;
+        --app-secondary-color: black;
+        display: block;
+      }
+    </style>
+
+    <app-location route="{{route}}" query-params="{{queryParams}}"></app-location>
+    <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+    <div class="card">
+      <h2 class="ql-align-center">${headers.aHeadline}</h2>
+      <p class="ql-align-center">${headers.aPre}</p>
+      <iframe class="ql-video ql-align-center" frameborder="0" allowfullscreen="true" src="${headers.aVideo}"></iframe>
+      <p class="ql-align-center">
+        <br>
+      </p>
+      <p class="ql-align-center">${headers.aPost}</p>
+
+      <div class="narrow-card">
+        <form is="iron-form" id="emailPostForm">
+          <paper-input hidden id="properNameShow" label="Name: First Last" placeholder="for example: John Smith"></paper-input>
+          <paper-button class="submit-button" type="submit" raised id="indicateCuriosity" on-tap="_submitEmailAddress"><strong>Enroll</strong></paper-button>
+        </form>
+      </div>
+    </div>
+
+    <form method="get" action="https://clouddancer.co/landing.html">
+      <input id="emailAddress" hidden type="text" name="emailAddress">
+      <input id="properName" hidden type="text" name="properName">
+      <input id="topicKey" hidden type="text" name="topicKey" value="${headers.fileKey}">
+      <input id="hiddenbutton" type="submit" hidden>
+    </form>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'to-z${headers.fileKey}e',
+
+      properties: {
+        queryParams: {
+          type: String,
+          observer: '_paramsChanged',
+        }
+      },
+      _submitEmailAddress: function() {
+          this.$.properName.value = this.$.properNameShow.value;
+        this.$.hiddenbutton.click();
+      },
+      _paramsChanged: function(queryParams) {
+        console.log("INCOMING PARAMS: \n" + JSON.stringify(queryParams)+ "\n\n");
+        var email = queryParams.email;
+        if(email===undefined||email==null||!email||email.length<6){
+            alert("This page requires email data from a previous page. Sending you back there now.");
+              window.location.href = 'z${headers.fileKey}c.html';
+        }
+        this.$.emailAddress.value=email;
+        this.$.properNameShow.value=queryParams.properName;
+        if(!this.$.properNameShow.value){
+        	this.$.properNameShow.hidden=false;
+        }
+      }
+    });
+  </script>
+</dom-module>

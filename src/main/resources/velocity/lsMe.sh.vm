@@ -1,0 +1,4 @@
+echo "--------------------"
+echo "HERE IS WHAT IS IN THIS ${headers.myDirectory} DIRECTORY:" 
+cd ../${headers.myDirectory}
+ls

@@ -1,0 +1,131 @@
+This doc is titled CD_PROFILE but really it's about the whole app and how the initial design for securing pages came about.
+So much of this became trash by April 2017 that this whole doc is now questionable
+	should be moved to the slides if possible, anyway
+
+I am writing this in Feb 2017 but so far this has been a very fluid situation so no telling if what I write today will be how the actual design evolves.
+
+The main purpose of this design is not bulletproof security (which would be nice) but instead
+	how to hide from the user information which he is not yet entitled to see and/or manipulate.
+
+Goes without saying that firebase db rules also compliment this design. Those rules are not referenced here, mostly.
+
+WHAT: PROFILE FROM THE UI's PERSPECTIVE
+	CONTENT FILTERS:
+		The UI does not care about whence it's profile cometh
+			it only cares about WHAT to display at that moment
+		The UI takes it's cues from only two places
+			cd-profile[property]
+			window.cdProfile (which is simultaneously a cd-profile.cdProfile property)
+		The UI takes it's primary cues from 4 almost mutually exclusive booleans
+			cd-profile.fresh
+			cd-profile.invited
+			cd-profile.pending
+			cd-profile.nuskin (has a nuskin id)
+			cd-profile.dist (not mutually exclusive with cd-profile.nuskin only)
+		The UI also has one additional content boolean which is not mutually exclusive
+			cd-profile.admin
+	ATTRIBUTES:
+		The UI also has other attributes which it takes from, but these are not content filters per se
+			These are taken from window.cdProfile.whatever, as much as possible
+NO WORK VS EDGE CASE
+	90% of the time there will be almost no work involved for cd-profile
+		browser opens up the cookie, cd-profile.nuskin and cd-profile.dist set
+			directly from the cookie
+	10% of the time there is a shifting state that tries to get to the 90% version
+		this involves a ton of work and logic
+	thus 90% of the work is for 10% of the usage by volume
+
+WHAT TRIGGERS EACH MOVE
+	invited is based on the 4 params setting the window.emailAddress etc
+	pending is based on invited plus logged in
+	nuskin/dist is based on an administrative function (db)
+	admin is based on an administrative function
+	logging in from another computer requires a valid nsid or original invitation
+
+LOGGED IN VS NOT YET LOGGED IN
+	This is super tricky in this system because you can't even get offered a login
+		unless you were invited first!!!!
+	It is doubly tricky that if you log in without a record of an invite
+		you will be immediately logged out as soon as you log in
+
+HOW: PROFILE FROM PERSPECTIVE OF PROGRESSION:
+	On the app the progression of an individual's role might go something like this.
+		[ shows nothing for uninvited person - query params required to get started ]
+		Enrolled: .co/landing.html allows person with correct params to get to Invite status by furnishing data
+		Invited: Only google login shows up until that is complete
+		Logged In: Pending status pages are all that shows.
+		Approved: Can use the site.
+		[other by more arcane code]
+
+THE TECHNOLOGY:
+	- GET queryParams which become fields of cdProfile object
+	- Cookie storing JSON cdProfile object
+	- Firebase db persisting cdProfile object
+	- window.???
+	- some/partial cd-profile properties where relevant
+
+WHICH TECHNOLOGY WHEN
+Answer: all, together.
+	queryParams are used until getting to .co/ root, where they are
+		written as a JSON Cookie as cdProfile
+		written to window as window.cdProfile
+	Firebase db is used as soon as login is created.
+	cd-profile component properties are used in a more sparse or derivative manner
+
+WHY ALL SIX TECHNOLOGIES?
+	window.cdProfile is only way that I can figure out how to manage the UI easily with my current skillset
+	Cookie is a great backup only, especially before login, but if something goes wrong with a return trip via queryParams
+	db is the ideal way to assure consistency between sessions, computers, ...
+	queryParams is the easy way to get what I need from the progression of sales and leadCapture pages
+	cd-profile component properties are relevant in some circumstances
+	google user is mined where appropriate, such as where email or display name is missing
+
+HOW TO MANAGE ALL TECHNOLOGIES AGAINST EACH OTHER?
+	putting the same data in 6 technologies is problematical
+		(even though queryParams drops out quickly)
+	once arriving at the .co/ root, all 4 technologies are managed by one component: cd-profile
+	sequence
+		each technology collects it's own version of cdProfile object
+		cd-profile is then "merged" via code inside cdProfile
+			the primary idea here is not perfection but to use the most complete version of each field available
+		the merged cdProfile is then
+			persisted back to each of
+				db
+				cookies
+				window
+			consumed by whatever
+	ideally the db record takes over once a user has settled into his normal usage patterns.
+		with window.cdProfile acting as the message
+
+WHICH ELEMENTS ARE PUT IN THE CD PROFILE?
+	anything required by the UI to know how to display it's goods
+	nothing fat or big - no giant keys, for example
+	nothing which is already in google user
+
+CHATTER ISSUES
+
+The cd-profile component may be used extensively throughout the app.
+Thus it is important to keep it from re-initializing needlessly with every component or every access.
+
+DEMOTION ISSUES
+
+The way the cd-profile functionality is written, initially, the profile is built sequentially.
+UI permissions evolve as each new part of the profile is added.
+It would be necessary to be careful to make sure that old cookies, for example,
+	don't give permissions to a user who has been demoted in the db record.
+
+ODDITIES AND DUPLICATIONS
+
+	- There are two versions of users, with possible differences and/or duplications
+		the user that is created to get invited with a topic
+		the user that is created to log in to Google
+	- Some fields are deduped
+		properName is replaced by google's displayName
+	- some fields are maintained in two separate objects
+		window.cdProfile.emailAddress - the one they logged in with
+		window.cdProfile.email - what they created their google id with
+	- some are copied into multiple locations
+		window.cdProfile.uid is also in _user
+	- some are stored twice, but only as a smaller version
+		cd-profile._user is a small duplicate of google user
+		this is for denormalization purposes

@@ -1,0 +1,22 @@
+this file should eventually be obsolete and deleted
+ - migrate shell to working version on windows box
+ - opening pages and John Smith at page head
+ - whatever lets Jan get started
+ - downline imports
+ - input of person into email is always good use of time
+ 
+ - PullRoutes.from("file://propertyFiles/ figure out how to make it not reprocess at restart - probably by leaving a breadcrumb file
+ 	or else moving processed file somewhere else?
+ 	or ...
+ - it would be better to increase frequency of velocity work polling, 
+ 	and then somehow
+ 		putting in a delay if one had started, such that it waited for it to finish, first
+ 		would it work to monitor deploy.txt?
+ - basic blocking and tackling needs to be tested on both writes and reads from UI-db on both ends
+ - public void onChildChanged(DataSnapshot dataSnapshot, - test and fulfill that
+ - queryParams > cookies > db predominance
+ - user-profile.setinterval could be replaced with onChange event of uid.cdProfile
+ 	wonder if I could make component to component with firebase messaging?
+ - still lots of package level class members to clean up???
+ 
+ 

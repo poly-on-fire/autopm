@@ -1,0 +1,76 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/app-route/app-location.html">
+<link rel="import" href="/bower_components/app-route/app-route.html">
+<link rel="import" href="/bower_components/iron-form/iron-form.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="/bower_components/paper-styles/paper-styles.html">
+
+<dom-module id="to-enrolled">
+  <template>
+    <style include="shared-styles">
+      :host {
+        --app-primary-color: #4285f4;
+        --app-secondary-color: black;
+        display: block;
+      }
+    </style>
+
+    <app-location route="{{route}}" query-params="{{queryParams}}"></app-location>
+    <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+    <div class="card">
+      <h2 class="ql-align-center">${headline}</h2>
+      <p class="ql-align-center">${topBody}</p>
+      <iframe class="ql-video ql-align-center" frameborder="0" allowfullscreen="true" src="${videoLink}"></iframe>
+      <p class="ql-align-center">
+        <br>
+      </p>
+      <p class="ql-align-center">${bottomBody}</p>
+
+      <div class="narrow-card">
+        <form is="iron-form" id="emailPostForm">
+          <paper-input id="email" label="Email Address" required placeholder="jwsmith@io.co" prevent-invalid-input pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" error-message="Enter your preferred email address"></paper-input>
+          <paper-input id="properNameShow" label="Name: First Last" placeholder="John Smith"></paper-input>
+          <paper-button class="submit-button" type="submit" raised id="indicateCuriosity" on-tap="_submitEmailAddress"><strong>Click Here to Inquire Further</strong></paper-button>
+        </form>
+      </div>
+    </div>
+
+    <form method="get" action="/enrolled.html">
+      <input id="emailAddress" hidden type="text" name="email">
+      <input id="properName" hidden type="text" name="properName">
+      <input hidden type="text" name="topic" value="${topic}">
+      <input id="hiddenbutton" type="submit" hidden>
+    </form>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'to-enrolled',
+
+      properties: {
+        queryParams: {
+          type: String,
+          observer: '_paramsChanged',
+        }
+      },
+      _submitEmailAddress: function() {
+        if (this.$.emailPostForm.validate()) {
+          this.$.emailAddress.value = this.$.email.value;
+          if (this.$.properNameShow.value) {
+            this.$.properName.value = this.$.properNameShow.value;
+          }
+          this.$.hiddenbutton.click();
+          this.$.emailPostForm.reset();
+        } else {
+          this.$.email.value = null;
+        }
+      },
+      _paramsChanged: function(queryParams) {
+        console.log("FOUND THIS: " + JSON.stringify(queryParams));
+      }
+    });
+  </script>
+</dom-module>

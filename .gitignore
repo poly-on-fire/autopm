@@ -1,0 +1,13 @@
+commit.sh
+gitinit.sh
+propertyFiles
+/.metadata/
+.idea/
+auto.iml
+src/test/java/pull/service/util/EmailManualDev.java
+target
+.classpath
+.project
+autopm.iml
+nopass.sh
+propertyFiles

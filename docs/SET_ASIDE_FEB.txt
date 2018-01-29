@@ -1,0 +1,65 @@
+ - UI for adding someone's email to my topic
+ - add feature later that makes sure people aren't getting too many emails a day
+ - fix display of extract values in the UI
+ - make deploy of camel toggleable on and off from property file for easier testing
+ - same thing with other testable functions
+ - set up polymer build for smaller footprint
+ - UI remove mixed text controls that confused Jan
+ - UI make it view the video immmediately to validate
+ - UI set css so that pages look a bit closer to real.
+ - edit UIs for many db tables
+ - better clarification of what the three page creating tables do
+ - 404s suck on both sites
+ - improve the cookie and storage and parameter passing especially on .info
+ - tighten up the security where reasonable
+ - email and facebook logins
+ - general visibility stuff everywhere
+ - config display stuff especially Your Name Here
+ - index page for .info
+    review
+        a page
+            writes to cookies
+            action goes to wait for verify page
+            javascript writes to firebasedb instantaneously
+            verify email goes to a page with params
+            if no topic key, returns to self
+        a page
+            if no topic key, returns to a
+            if no validated email, returns to a
+            if no validation key, returns to a
+            writes to cookies
+            action goes to .co/enroll.html
+ - more carefully articulated index.html process for non-users .co
+ - perhaps opportunity to "include" more parts of .info pages to reduce size
+ - shell script for downloading latest on autocdsf windows box
+ - clean up the crappola around main() and testing and random init stuff
+ - should theoretically be able to delete stuff cause and all related cruft such as topic properties to delete
+ - spin out data access stuff into behaviors?
+ - fix the many quill content bugs
+ - trim back undesired functionality from css file and from quill itself
+ - I would eventually want to
+    move from polymerfire query to straight javascript
+    move db interaction into behaviors
+    perhaps move some client side work into server side cleanup
+        extracting content blurb
+        cleaning up abandoned emails
+    really need update/add functionality separated in auto
+ - install promises functionality where applicable
+ - misc javascript cleanupish refactoring
+ - there is a possibility of a person enrolling with nuskin, even making an order, and not enrolling and thus still getting emails
+ - the verify email is from "verify" and needs to be something less dorky
+ - any bad actor can crash my server by passing in a wrong type from the browser in dev mode. Just saying.
+ - would be better if db-combo whatever returned a hashtable instead of a list just saying
+ - the values in topicType are custom changed by hand on fb UI and if this is lost so will they be
+ - faq for topicType may be a higher priority than some other things
+ - might want to write email as both html and text for some older clients
+ - will definitely want to send css eventually with email
+ - clouddancer.info and clouddancer.co index pages can't be avoided forever and are actually modest opportunities
+ - using a profiler make sure that FetchSendEmailRepo isn't a memory leak...
+ - shouldn't FetchSendEmailRepo also be writing log to servers
+ - there is still a lot of my EmailThisOrThat naming which is confusing as hell
+ - sendEmail.go("pete@clouddancer.co", "Pete Carapetyan" ........ instead needs to be sending from the user
+ - document how instead you could use aweber and clickfunnels
+ - in topic page put "notes to self" field in the summary at bottom
+ - there is css that is not in shared, and vis-versa
+ - fixing the red stuff in intellij html views would be helpful

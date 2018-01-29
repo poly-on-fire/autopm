@@ -1,0 +1,41 @@
+This is opening as a note to Cameron
+
+- there is a reason for [Martin] being so ... about CQRS
+- compared to single value of truth it is pure hell
+- writing ... as events is weird
+- totally different way to think - main thing is you really HAVE to think, as opposed to SQL which often precludes thinking
+- super fast shallow lookups seem to be the key
+- documentation on practically everything seems (comparatively) non-existant
+- start with a relatively lame project and make it for about a year ....
+- upsert seems to be one critical piece of functionality
+- design and use of keys seems to be another key piece
+- also makes me think about when do I want to place stuff in memory to avoid chattering on the network?
+- also makes me think about when do I want to prune stuff in memory?
+- getting super fast at basic operations that you would do in sql seems fundamental but overlooked
+- testing techniques are also challenging - how to test without reloading server into memory every time?
+- I think it really helps to know one's driver: in my case free as in beer and devops and legacy db
+- there is lots of this stuff I JUST DON'T KNOW WHAT THE DAMN PATTERN IS
+- CQRS and listeners/observers and denormalization and new syntax/semantics and mixed java/JS and no docs is a lot to stomach in one bite
+- really makes me want to learn disruptor
+- any question that can be answered "hmmm I can think of a hundred different ways to solve that problem" is an expensive or disabling question
+- being able to stare at the data itself in json form, in the UI, is surprisingly helpful
+- if you did this as a group and talked about it as you did it, would be even more expensive. Matt would freak
+- finding myself creating very interesting composite keys instead of generated keys hmmmm
+- sequential 18 digit unique string keys also very useful including substringing from other keys
+- hah! we (SQL RDBMS guys) were the revolutionaries 3 decades ago....
+- diff between good enough (duplicate wrong data due to crappy key as .0001% chance) vs perfect is also worth noting
+- I have spent 50 hours on design that would have taken me 10 minutes in SQL RDBMS and still wondered if I did the right thing because so many tradeoffs each decision
+- ACID is still a pretty good guideline
+- some of the ideas are so foreign that even after I did them, 2 weeks later I had forgotten and tried to recreate same
+- to make this work I really had to let go of the idea of not wasting bits. Like this key: 	users/iwanyTWkgtVT4yJrLgFIgjXheBP2/emailMeta/-KcyOJWIpTEZQX7DRsHH
+- to give you a frame of reference, Cameron, if we had this during rewards it would have been delivered and super easy with half the staff or less
+- March 26th - the whole reactor pattern is personally offensive to any hardcore command/control guy
+	in the sense that it's like telling your little brother not to clean up his messes
+		someone else will follow behind him and do all that
+	brings to bear the misconception of Iraqis on the meaning of "freedom" as in anything goes
+		doesn't mean that even in the least
+			but because so much of this is overloaded
+				there is no wonder at the misunderstanding
+	this problem of overloading is really the heart of betterology
+		and also this Iraqi story is the easiest entry point into same
+
