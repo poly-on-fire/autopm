@@ -8,13 +8,17 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import pull.domain.EmailLog;
+import pull.util.SendEmail;
 
 @Service
 public class SendEmailVerifyEmail {
+	@Autowired
+	SendEmail sendEmail;
 
 	@Value("${run.naked}")
 	private boolean runNaked;
@@ -39,30 +43,21 @@ public class SendEmailVerifyEmail {
 			processEmailLog = false;
 		}
 		if (processEmailLog) {
-			Email email = new SimpleEmail();
-			email.setHostName("smtp.socketlabs.com");
-			email.setSmtpPort(25);
-			email.setAuthenticator(new DefaultAuthenticator("server15906", "n6M7Zdo8DFy5"));
-			email.setSSLOnConnect(true);
-			email.setSubject("Please click to verify your email.");
 			try {
 				String properName = emailLog.getProperName();
 				if(null!=properName&&properName.trim().length()>3){
 					properName = URLEncoder.encode(properName.trim(), "UTF-8");
 				}
-				email.setFrom("verify@clouddancer.info", "cloudDancer.info Server");
-				email.setMsg("Your email address has been verified! To view the content you have requested, click "
+				String message = "Your email address has been verified! To view the content you have requested, click "
 						+  " https://clouddancer.info/z"
 						+ emailLog.getTopicKey() + "e.html?topic=" + emailLog.getTopicKey() + "&properName="
 						+ properName + "&email="
-						+ emailLog.getEmailAddress() + "\n\n Alternately, you may also paste the link in your browser address bar.");
-				email.addTo(emailLog.getEmailAddress());
-				email.send();
-			} catch (EmailException e) {
+						+ emailLog.getEmailAddress() + "\n\n Alternately, you may also paste the link in your browser address bar.";
+
+				sendEmail.go("verify@clouddancer.info", "cloudDancer.info Server", emailLog.getEmailAddress(), message, "Please click to verify your email.");
+			} catch (Exception e) {
 				e.printStackTrace();
-			} catch (UnsupportedEncodingException e) {
-				// do i care? probably, TODO
-				e.printStackTrace();
+				//TODO handle real exception, UnsupportedEncodingException
 			}
 		}
 	}
