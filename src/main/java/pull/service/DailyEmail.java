@@ -20,7 +20,7 @@ public class DailyEmail {
 	SendEmail sendEmail;
 	@Value("${run.naked}")
 	private boolean runNaked;
-	@Value("${email.from}")
+	@Value("${EMAIL_FROM}")
 	private String emailFrom;
 
 	public void send() {

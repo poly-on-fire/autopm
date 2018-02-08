@@ -25,7 +25,7 @@ import pull.util.SendEmail;
 public class NewUserRepo {
 	@Autowired
 	SendEmail sendEmail;
-	@Value("${email.from}")
+	@Value("${EMAIL_FROM}")
 	private String emailFrom;
 
 	private DatabaseReference newUserRef;

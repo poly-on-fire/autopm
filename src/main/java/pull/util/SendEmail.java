@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SendEmail {
-    @Value("${email.host.name}")
+    @Value("${EMAIL_HOST_NAME}")
     private String emailHostName;
-    @Value("${email.port}")
+    @Value("${EMAIL_PORT}")
     private int emailPort;
-    @Value("${email.server}")
+    @Value("${EMAIL_SERVER}")
     private String emailServer;
-    @Value("${email.auth}")
+    @Value("${EMAIL_AUTH}")
     private String emailAuth;
 
     public void go(String fromEmail, String fromName, String to, String msg, String subject) throws Exception {

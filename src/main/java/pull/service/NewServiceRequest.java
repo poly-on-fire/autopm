@@ -19,7 +19,7 @@ public class NewServiceRequest {
 	SendEmail sendEmail;
 	@Value("${run.naked}")
 	private boolean runNaked;
-	@Value("${email.from}")
+	@Value("${EMAIL_FROM}")
 	private String emailFrom;
 
 

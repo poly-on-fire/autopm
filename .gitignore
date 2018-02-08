@@ -11,3 +11,4 @@ target
 autopm.iml
 nopass.sh
 propertyFiles
+envVars.sh
