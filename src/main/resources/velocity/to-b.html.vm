@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <form method="get" action="https://clouddancer.co/landing.html">
+    <form method="get" action="https://pullmodel.com">
       <input id="emailAddress" hidden type="text" name="emailAddress">
       <input id="properName" hidden type="text" name="properName">
       <input id="topicKey" hidden type="text" name="topicKey" value="${headers.fileKey}">

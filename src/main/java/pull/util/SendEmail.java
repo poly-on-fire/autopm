@@ -28,7 +28,7 @@ public class SendEmail {
         email.setHtmlMsg(msg);
         email.setTextMsg("Your email client does not support HTML messages");
         email.addTo(to);
-        email.send();
+//        email.send();
     }
 
     public void devTest(String emailHostName, int emailPort, String emailServer, String emailAuth, String fromEmail,
