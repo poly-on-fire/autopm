@@ -9,6 +9,7 @@ import org.apache.camel.ProducerTemplate;
 import pull.service.DeployCheck;
 
 public class DeploymentProcessor implements Processor {
+	private static int count = 0;
 
 	DeployCheck deployCheck;
 
@@ -39,7 +40,17 @@ public class DeploymentProcessor implements Processor {
 				}
 			});
 		} else {
-			System.err.println("NOTHING TO DEPLOY ... moving on ... " + new Date());
+
+			printServer();
+		}
+	}
+	void printServer(){
+		if(count<80){
+			count++;
+			System.err.print(".");
+		}else{
+			count=0;
+			System.err.println(".\n");
 		}
 	}
 
