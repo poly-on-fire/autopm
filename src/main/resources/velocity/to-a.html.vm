@@ -3,109 +3,115 @@
 <link rel="import" href="/bower_components/app-route/app-route.html">
 <link rel="import" href="/bower_components/iron-form/iron-form.html">
 <link rel="import"
-	href="/bower_components/paper-icon-button/paper-icon-button.html">
+      href="/bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="/bower_components/paper-input/paper-input.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import"
-	href="/bower_components/paper-styles/paper-styles.html">
-<link rel="import" href="/bower_components/polymerfire/polymerfire.html" />
+      href="/bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="/bower_components/polymerfire/polymerfire.html"/>
 <link rel="import"
-	href="/bower_components/polymerfire/firebase-app.html" />
+      href="/bower_components/polymerfire/firebase-app.html"/>
 <link rel="import"
-	href="/bower_components/polymerfire/firebase-auth.html" />
+      href="/bower_components/polymerfire/firebase-auth.html"/>
 <link rel="import"
-	href="/bower_components/polymerfire/firebase-query.html" />
+      href="/bower_components/polymerfire/firebase-query.html"/>
 
-<dom-module id="to-z${headers.fileKey}c"> <template>
-<style include="shared-styles">
-:host { -
-	-app-primary-color: #4285f4; -
-	-app-secondary-color: black;
-	display: block;
-}
-</style>
+<dom-module id="to-z${headers.fileKey}c">
+  <template>
+    <style include="shared-styles">
+      :host {
+        --app-primary-color: #4285f4;
+        --app-secondary-color: black;
+        display: block;
+      }
+    </style>
 
-<app-location route="{{route}}" query-params="{{queryParams}}"></app-location>
-<app-route route="{{route}}" pattern="/:page" data="{{routeData}}"
-	tail="{{subroute}}"> </app-route> <firebase-app
-	auth-domain="clouddancerco.firebaseapp.com"
-	database-url="https://clouddancerco.firebaseio.com/"
-	api-key="AIzaSyCuixClu-jQO8QwLTjz-1KcELNpSysFxhI"> </firebase-app> <firebase-auth
-	id="auth" user="{{user}}" on-error="handleError"> </firebase-auth> <firebase-query
-	id="emailLogQuery" path="/emailLog"> </firebase-query>
+    <app-location route="{{route}}" query-params="{{queryParams}}"></app-location>
+    <app-route route="{{route}}" pattern="/:page" data="{{routeData}}"
+               tail="{{subroute}}"></app-route>
+    <firebase-app id='firebase' auth-domain="pullmodel.com"
+                  database-url="https://pullmodel-5d998.firebaseio.com/"
+                  projectId="pullmodel-5d998"
+                  api-key="AIzaSyDiXkbQjp9kITeLZFaZPHDGS1BetcPlvCo">
+    <firebase-auth
+            id="auth" user="{{user}}" on-error="handleError"></firebase-auth>
+    <firebase-query
+            id="emailLogQuery" path="/emailLog"></firebase-query>
 
-<div class="card">
-	<h2 class="ql-align-center">${headers.aHeadline}</h2>
-	<p class="ql-align-center">${headers.aPre}</p>
-	<iframe class="ql-video ql-align-center" frameborder="0"
-		allowfullscreen="true" src="${headers.aVideo}"></iframe>
-	<p class="ql-align-center">
-		<br>
-	</p>
-	<p class="ql-align-center">${headers.aPost}</p>
-		<br>
-	<div class="narrow-card">
-		<form is="iron-form" id="emailPostForm">
-			<paper-input id="email" label="Email Address" required
-				placeholder="type your best email address here" prevent-invalid-input
-				pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,14})+$"
-				error-message="Enter your preferred email address"></paper-input>
-			<paper-input id="name" label="Name: First Last"
-				placeholder="for example: John Smith"></paper-input>
-			<paper-button class="submit-button" type="submit" raised
-				id="indicateCuriosity" on-tap="_submitEmailAddress">
-			<strong>Click Here to Inquire Further</strong></paper-button>
-		</form>
-	</div>
-</div>
+    <div class="card">
+      <h2 class="ql-align-center">${headers.aHeadline}</h2>
+      <p class="ql-align-center">${headers.aPre}</p>
+      <iframe class="ql-video ql-align-center" frameborder="0"
+              allowfullscreen="true" src="${headers.aVideo}"></iframe>
+      <p class="ql-align-center">
+        <br>
+      </p>
+      <p class="ql-align-center">${headers.aPost}</p>
+      <br>
+      <div class="narrow-card">
+        <form is="iron-form" id="emailPostForm">
+          <paper-input id="email" label="Email Address" required
+                       placeholder="type your best email address here" prevent-invalid-input
+                       pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,14})+$"
+                       error-message="Enter your preferred email address"></paper-input>
+          <paper-input id="name" label="Name: First Last"
+                       placeholder="for example: John Smith"></paper-input>
+          <paper-button class="submit-button" type="submit" raised
+                        id="indicateCuriosity" on-tap="_submitEmailAddress">
+            <strong>Click Here to Inquire Further</strong></paper-button>
+        </form>
+      </div>
+    </div>
 
-<form method="get" action="/verify.html">
-	<input id="emailAddress" hidden type="text" name="email"> <input
-		id="propername" hidden type="text" name="propername"> <input
-		hidden type="text" name="topic" value="${topic}"> <input
-		id="hiddenbutton" type="submit" hidden>
-</form>
-</template> <script>
-	Polymer({
-		is : 'to-z${headers.fileKey}c',
+    <form method="get" action="/verify.html">
+      <input id="emailAddress" hidden type="text" name="email"> <input
+            id="propername" hidden type="text" name="propername"> <input
+            hidden type="text" name="topic" value="${topic}"> <input
+            id="hiddenbutton" type="submit" hidden>
+    </form>
+  </template>
+  <script>
+    Polymer({
+      is: 'to-z${headers.fileKey}c',
 
-		properties : {
-			queryParams : {
-				type : String,
-				observer : '_paramsChanged',
-			}
-		},
-		_submitEmailAddress : function() {
-			if (this.$.emailPostForm.validate()) {
-				this.add();
-				this.$.emailAddress.value = this.$.email.value;
-				if (this.$.name.value) {
-					this.$.propername.value = this.$.name.value;
-				}
-				this.$.hiddenbutton.click();
-				this.$.emailPostForm.reset();
-			} else {
-				this.$.email.value = null;
-			}
-		},
-		_paramsChanged : function(queryParams) {
-			console.log("FOUND THIS: " + JSON.stringify(queryParams));
-		},
-		add : function() {
-			if (this.$.emailPostForm.validate()) {
-				var newEmailLogKey = this.$.emailLogQuery.ref.push().key
-				var emailLog = {
-					topicName : "${headers.name}",
-					emailAddress : this.$.email.value,
-					properName : this.$.name.value,
-					topicKey : "${headers.fileKey}",
-					timeStamp : Date.now()
-				};
-				var emailLogUpdates = {};
-				emailLogUpdates["/" + newEmailLogKey] = emailLog;
-				this.$.emailLogQuery.ref.update(emailLogUpdates);
-				this.$.emailPostForm.reset();
-			}
-		}
-	});
-</script> </dom-module>
+      properties: {
+        queryParams: {
+          type: String,
+          observer: '_paramsChanged',
+        }
+      },
+      _submitEmailAddress: function () {
+        if (this.$.emailPostForm.validate()) {
+          this.add();
+          this.$.emailAddress.value = this.$.email.value;
+          if (this.$.name.value) {
+            this.$.propername.value = this.$.name.value;
+          }
+          this.$.hiddenbutton.click();
+          this.$.emailPostForm.reset();
+        } else {
+          this.$.email.value = null;
+        }
+      },
+      _paramsChanged: function (queryParams) {
+        console.log("FOUND THIS: " + JSON.stringify(queryParams));
+      },
+      add: function () {
+        if (this.$.emailPostForm.validate()) {
+          var newEmailLogKey = this.$.emailLogQuery.ref.push().key
+          var emailLog = {
+            topicName: "${headers.name}",
+            emailAddress: this.$.email.value,
+            properName: this.$.name.value,
+            topicKey: "${headers.fileKey}",
+            timeStamp: Date.now()
+          };
+          var emailLogUpdates = {};
+          emailLogUpdates["/" + newEmailLogKey] = emailLog;
+          this.$.emailLogQuery.ref.update(emailLogUpdates);
+          this.$.emailPostForm.reset();
+        }
+      }
+    });
+  </script>
+</dom-module>
