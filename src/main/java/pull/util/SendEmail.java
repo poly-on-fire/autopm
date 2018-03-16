@@ -17,7 +17,7 @@ public class SendEmail {
     private String emailAuth;
 
     public void go(String fromEmail, String fromName, String to, String msg, String subject) throws Exception {
-        System.err.println("SENDING EMAIL " + subject);
+        System.err.println("SENDING EMAIL " + subject + " EMAIL AUTH: "+ emailAuth);
         HtmlEmail email = new HtmlEmail();
         email.setHostName(emailHostName);
         email.setSmtpPort(emailPort);

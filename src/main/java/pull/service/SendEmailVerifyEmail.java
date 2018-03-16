@@ -27,6 +27,7 @@ public class SendEmailVerifyEmail {
 		if(runNaked) {
 			return;
 		}
+		//TODO this looks crazy what about using the front end's regex here?
 		boolean processEmailLog = true;
 		if (emailLog == null) {
 			System.err.println("YOU ARE SOMEHOW ATTEMPTING TO PROCESS A NULL EMAIL LOG");
@@ -45,6 +46,7 @@ public class SendEmailVerifyEmail {
 		if (processEmailLog) {
 			try {
 				String properName = emailLog.getProperName();
+				//TODO this looks crazy here too, what about using the front end's regex here?
 				if(null!=properName&&properName.trim().length()>3){
 					properName = URLEncoder.encode(properName.trim(), "UTF-8");
 				}
