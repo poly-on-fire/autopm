@@ -25,8 +25,9 @@ public class WriteTopicToProps {
 		boolean isGeneratingType = false;
 		if (isField(topic.getAHeadline()) && isField(topic.getAPost())
 				&& isField(topic.getAPre()) && isField(topic.getAVideo())
-				&& isField(topic.getBHeadline()) && isField(topic.getBPre())
-				&& isField(topic.getBPost()) && isField(topic.getBVideo())) {
+//				&& isField(topic.getBHeadline()) && isField(topic.getBPre())
+//				&& isField(topic.getBPost()) && isField(topic.getBVideo())
+				) {
 			hasNecessaryStuff = true;
 		}
 		String type = topic.getTopicType();
@@ -108,9 +109,5 @@ public class WriteTopicToProps {
 		System.err.println("2" + topic.getAPre());
 		System.err.println("3" + topic.getAVideo());
 		System.err.println("4" + topic.getAPost());
-		System.err.println("5" + topic.getBHeadline());
-		System.err.println("6" + topic.getBPre());
-		System.err.println("7" + topic.getBVideo());
-		System.err.println("8" + topic.getBPost());
 	}
 }
