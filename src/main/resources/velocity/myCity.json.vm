@@ -1,8 +1,0 @@
-{
-  "rank" : ${headers.rank},
-  "city" : "${headers.city}",
-  "country" : "${headers.country}",
-  "population" : ${headers.population},
-  "sqMiles" : ${headers.sqMiles},
-  "densitySqMile" : ${headers.densitySqMile}
-}

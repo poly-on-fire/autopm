@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <form method="get" action="https://pullmodel.com">
+    <form method="get" action="https://pullmodel.com/logins">
       <input id="emailAddress" hidden type="text" name="emailAddress">
       <input id="properName" hidden type="text" name="properName">
       <input id="topicKey" hidden type="text" name="topicKey" value="${headers.fileKey}">

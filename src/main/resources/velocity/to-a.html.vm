@@ -64,8 +64,8 @@
     </div>
 
     <form method="get" action="/verify.html">
-      <input id="emailAddress" hidden type="text" name="email"> <input
-            id="propername" hidden type="text" name="propername"> <input
+      <input id="emailaddress" hidden type="text" name="emailAddress"> <input
+            id="propername" hidden type="text" name="properName"> <input
             hidden type="text" name="topic" value="${topic}"> <input
             id="hiddenbutton" type="submit" hidden>
     </form>
@@ -83,7 +83,7 @@
       _submitEmailAddress: function () {
         if (this.$.emailPostForm.validate()) {
           this.add();
-          this.$.emailAddress.value = this.$.email.value;
+          this.$.emailaddress.value = this.$.email.value;
           if (this.$.name.value) {
             this.$.propername.value = this.$.name.value;
           }
