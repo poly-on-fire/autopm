@@ -14,7 +14,7 @@ public class PullRoutes extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from("timer://barebones?fixedRate=true&period=360000").log("\n\n\t .... running  ........");
+        from("timer://barebones?fixedRate=true&period=36000000").log("\n\n\t .... running  ........");
 
         from("file://propertyFiles/?noop=true").setHeader("fileKey").simple("${file:name.noext}")
                 .process(new VelocityHeaderPropertiesProcessor()).wireTap("direct:a").wireTap("direct:to-a")

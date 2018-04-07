@@ -21,7 +21,6 @@ public class DevSeedRoutes extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-//		from("timer://something?delay=6s&repeatCount=1").log("\n\n\t .... running  ........ for dev seed").bean(dailyEmail);
 		from("timer://something?delay=6s&repeatCount=1").log("\n\n\t .... running  ........ for dev seed").bean(devSeed);
 	}
 }
