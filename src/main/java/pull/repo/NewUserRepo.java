@@ -14,7 +14,6 @@ import pull.domain.TopicLookup;
 import pull.domain.TopicName;
 import pull.domain.CdProfile;
 import pull.domain.NewUser;
-import pull.domain.NsId;
 import pull.domain.ServiceAction;
 import pull.service.TopicDayService;
 import pull.util.Db;
@@ -86,7 +85,6 @@ public class NewUserRepo {
 
 	private void process(NewUser newUser) {
 		updateNewUser(newUser);
-		updateNsId(newUser);
 		try {
 			sendEmail.go(emailFrom, "Support at pullModel.com", newUser.email, ACCEPTANCE_TEXT,
 					"Welcome!");
@@ -95,22 +93,9 @@ public class NewUserRepo {
 		}
 	}
 
-	private void updateNsId(NewUser newUser) {
-		NsId nsId;
-		if(newUser.dist){
-			nsId= new NsId("dist");
-		}else{
-			nsId= new NsId("nuskin");
-		}
-		DatabaseReference nsIdRef = Db.coRef("/nsId/" + newUser.nsId);
-		nsIdRef.setValue(nsId);
-		
-	}
 
 	private void createNewUser(CdProfile cdProfile) {
 		NewUser newUser = new NewUser();
-		newUser.nsId = cdProfile.nsId;
-		newUser.nuskin = false;
 		newUser.dist = false;
 		newUser.email = cdProfile.emailAddress;
 		newUser.properName = cdProfile.properName;
@@ -130,7 +115,6 @@ public class NewUserRepo {
 				cdProfile.admin = false;
 				cdProfile.invited = false;
 				cdProfile.pending = false;
-				cdProfile.nuskin = true;
 				if (newUser.dist) {
 					cdProfile.dist = true;
 				}
@@ -174,12 +158,7 @@ public class NewUserRepo {
 		cdProfileRef.setValue(cdProfile);
 	}
 
-	private final String REJECTION_TEXT = "Your application to clouddancer.co was rejected,"
-			+ " probably because we didn't find the Nuskin Identifier in our downline. "
-			+ "Please re-apply through the same process, only using a NuSkin identifier "
-			+ "that corresponds to one signged up under the same sponsor. \n\n"
-			+ "If you believe that this message was sent in error, and you wish support, "
-			+ "please reply to this message";
+	private final String REJECTION_TEXT = "Your application to clouddancer.co was rejected,";
 	private final String ACCEPTANCE_TEXT = "Welcome to clouddancer.co! You should now be able to use this app.";
 
 }
