@@ -19,42 +19,16 @@ public class WriteTopicToProps {
     }
 
     public synchronized void go(String key, Topic topic) {
-
-        boolean hasNecessaryStuff = false;
-        boolean isGeneratingType = false;
-        if (isField(topic.getAHeadline()) && isField(topic.getAPost())
-                && isField(topic.getAPre()) && isField(topic.getAVideo())
-//				&& isField(topic.getBHeadline()) && isField(topic.getBPre())
-//				&& isField(topic.getBPost()) && isField(topic.getBVideo())
-                ) {
-            hasNecessaryStuff = true;
-        }
-        boolean hasBPage = false;
-
-        if (isField(topic.getBHeadline()) && isField(topic.getBPre())
-                && isField(topic.getBPost()) && isField(topic.getBVideo())) {
-            hasBPage = true;
-        }
         String type = topic.getTopicType();
-        System.out.println("LOOK HERE FOR CHANGING DEPLOYMENT TO OPTIONAL\n" + type);
-//		if (type.contains("OTG") || type.contains("Kuchel") || type.contains("London")) {
-        isGeneratingType = true;
-//		}
-        if (isGeneratingType && hasNecessaryStuff) {
-            writePropertiesFile(key, topic, hasBPage);
-        } else if (isGeneratingType && !hasNecessaryStuff) {
-            printProblemTopic(topic);
+        writePropertiesFile(key, topic);
+    }
+
+    private void writePropertiesFile(String key, Topic topic) {
+        if (!topic.getTopicType().startsWith("No")) {
+            Properties properties = parseTopicIntoProperties(topic);
+            writeFile(properties, key);
+            deployCheck.setDeploymentFlag(true);
         }
-    }
-
-    private void writePropertiesFile(String key, Topic topic, boolean hasBPage) {
-        Properties properties = parseTopicIntoProperties(topic, hasBPage);
-        writeFile(properties, key);
-        setDeploymentFlag();
-    }
-
-    private void setDeploymentFlag() {
-        deployCheck.setDeploymentFlag(true);
     }
 
     void writeFile(Properties properties, String key) {
@@ -69,7 +43,7 @@ public class WriteTopicToProps {
 
     }
 
-    Properties parseTopicIntoProperties(Topic topic, boolean hasBPage) {
+    Properties parseTopicIntoProperties(Topic topic) {
         Properties properties = new Properties();
         properties.put("topicType", topic.getTopicType());
         properties.put("name", topic.getName());
@@ -78,17 +52,20 @@ public class WriteTopicToProps {
         properties.put("aPre", clean(topic.getAPre()));
         properties.put("aVideo", clean(topic.getAVideo()));
         properties.put("aPost", clean(topic.getAPost()));
-        if (hasBPage) {
+        if (topic.getTopicType().startsWith("Dual")) {
             properties.put("bHeadline", clean(topic.getBHeadline()));
             properties.put("bPre", clean(topic.getBPre()));
             properties.put("bVideo", clean(topic.getBVideo()));
             properties.put("bPost", clean(topic.getBPost()));
-
         }
         return properties;
     }
 
     String clean(String string) {
+        if (string == null || string.trim().length() < 1) {
+            //TODO log, not system out
+            System.err.println("BAD INPUT SHOULD HAVE BEEN CAUGHT BY FRONT END JAVASCRIPT");
+        }
         string = string.replaceAll(Pattern.quote("${"), "-[");
         string = string.replaceAll(Pattern.quote("{"), "[");
         string = string.replaceAll(Pattern.quote("}"), "]");
