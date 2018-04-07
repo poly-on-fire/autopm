@@ -6,6 +6,7 @@ public class EmailLog {
 	private String properName;
 	private String topicKey;
 	private long timeStamp;
+	private boolean isDualWeb;
 
 
 	public EmailLog() {
@@ -30,6 +31,15 @@ public class EmailLog {
 				+ properName + ", topicKey=" + topicKey + ", timeStamp=" + timeStamp + "]";
 	}
 
+
+
+	public boolean isDualWeb() {
+		return isDualWeb;
+	}
+
+	public void setDualWeb(boolean dualWeb) {
+		isDualWeb = dualWeb;
+	}
 
 	public String getEmailAddress() {
 		return emailAddress;
