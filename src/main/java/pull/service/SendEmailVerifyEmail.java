@@ -72,7 +72,7 @@ public class SendEmailVerifyEmail {
 				String message = null;
 				if (null != dataSnapshot.getValue()) {
 					TopicLookup topicLookup = dataSnapshot.getValue(TopicLookup.class);
-					if(topicLookup.typeIndex=="2"){
+					if(topicLookup.typeIndex==2){
 						message = getDualWebPageMessage(emailLog);
 					}else {
 						message = getSingleWebPageMessage(emailLog);
