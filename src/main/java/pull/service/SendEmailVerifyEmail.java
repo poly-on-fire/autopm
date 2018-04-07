@@ -80,6 +80,7 @@ public class SendEmailVerifyEmail {
 					try {
 						sendEmail.go("verify@clouddancer.info", "cloudDancer.info Server", emailLog.getEmailAddress(), message, "Please click to verify your email.");
 					}catch (Exception e){
+					    //TODO logging instead of sysout
 						System.out.println(e.getMessage());
 					}
 				}
@@ -93,19 +94,31 @@ public class SendEmailVerifyEmail {
 
     private String getSingleWebPageMessage(EmailLog emailLog) {
         String message = "Your email address has been verified! To view the content you have requested, click "
-                +  " https://pullmodel.com/logins?topicKey="
-                + emailLog.getTopicKey() + "&properName="
-                + emailLog.getProperName() + "&emailAddress="
-                + emailLog.getEmailAddress() + "\n\n Alternately, you may also paste the link in your browser address bar.";
+                +  " https://pullmodel.com/logins?topicKey=" + emailLog.getTopicKey()
+                + "&properName=" + encode(emailLog.getProperName())
+                + "&emailAddress=" + emailLog.getEmailAddress()
+                + "\n\n Alternately, you may also paste the link in your browser address bar.";
         return message;
     }
 
     private String getDualWebPageMessage(EmailLog emailLog) {
         String message = "Your email address has been verified! To view the content you have requested, click "
-                +  " https://clouddancer.info/z"
-                + emailLog.getTopicKey() + "e.html?topic=" + emailLog.getTopicKey() + "&properName="
-                + emailLog.getProperName() + "&email="
-                + emailLog.getEmailAddress() + "\n\n Alternately, you may also paste the link in your browser address bar.";
+                +  " https://clouddancer.info/z" + emailLog.getTopicKey()
+                + "e.html?topic=" + emailLog.getTopicKey()
+                + "&properName=" + encode(emailLog.getProperName())
+                + "&email=" + emailLog.getEmailAddress()
+                + "\n\n Alternately, you may also paste the link in your browser address bar.";
         return message;
+    }
+
+    private String encode(String value){
+	    String val = null;
+	    try {
+            val = URLEncoder.encode(value.trim(), "UTF-8");
+        }catch(UnsupportedEncodingException e){
+	        //TODO log exception
+            System.out.println(e.getMessage());
+        }
+        return val;
     }
 }
