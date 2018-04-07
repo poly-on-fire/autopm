@@ -31,7 +31,7 @@ public class WriteTopicToPropsTest {
 		Topic topic = new Topic("topicType", "name", "category", 1234567890, "aHeadline",
 				"aPre", "aVideo", "aPost", "bHeadline", "bPre", "bVideo",
 				"bPost");
-		Properties properties = new WriteTopicToProps().parseTopicIntoProperties(topic, true);
+		Properties properties = new WriteTopicToProps().parseTopicIntoProperties(topic);
 		assertEquals(properties.getProperty("aPre"), "aPre");
 	}
 
