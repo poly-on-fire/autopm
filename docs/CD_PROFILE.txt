@@ -15,7 +15,7 @@ WHAT: PROFILE FROM THE UI's PERSPECTIVE
 			it only cares about WHAT to display at that moment
 		The UI takes it's cues from only two places
 			cd-profile[property]
-			window.cdProfile (which is simultaneously a cd-profile.cdProfile property)
+			window.profile (which is simultaneously a cd-profile.profile property)
 		The UI takes it's primary cues from 4 almost mutually exclusive booleans
 			cd-profile.fresh
 			cd-profile.invited
@@ -26,7 +26,7 @@ WHAT: PROFILE FROM THE UI's PERSPECTIVE
 			cd-profile.admin
 	ATTRIBUTES:
 		The UI also has other attributes which it takes from, but these are not content filters per se
-			These are taken from window.cdProfile.whatever, as much as possible
+			These are taken from window.profile.whatever, as much as possible
 NO WORK VS EDGE CASE
 	90% of the time there will be almost no work involved for cd-profile
 		browser opens up the cookie, cd-profile.nuskin and cd-profile.dist set
@@ -58,22 +58,22 @@ HOW: PROFILE FROM PERSPECTIVE OF PROGRESSION:
 		[other by more arcane code]
 
 THE TECHNOLOGY:
-	- GET queryParams which become fields of cdProfile object
-	- Cookie storing JSON cdProfile object
-	- Firebase db persisting cdProfile object
+	- GET queryParams which become fields of profile object
+	- Cookie storing JSON profile object
+	- Firebase db persisting profile object
 	- window.???
 	- some/partial cd-profile properties where relevant
 
 WHICH TECHNOLOGY WHEN
 Answer: all, together.
 	queryParams are used until getting to .co/ root, where they are
-		written as a JSON Cookie as cdProfile
-		written to window as window.cdProfile
+		written as a JSON Cookie as profile
+		written to window as window.profile
 	Firebase db is used as soon as login is created.
 	cd-profile component properties are used in a more sparse or derivative manner
 
 WHY ALL SIX TECHNOLOGIES?
-	window.cdProfile is only way that I can figure out how to manage the UI easily with my current skillset
+	window.profile is only way that I can figure out how to manage the UI easily with my current skillset
 	Cookie is a great backup only, especially before login, but if something goes wrong with a return trip via queryParams
 	db is the ideal way to assure consistency between sessions, computers, ...
 	queryParams is the easy way to get what I need from the progression of sales and leadCapture pages
@@ -85,17 +85,17 @@ HOW TO MANAGE ALL TECHNOLOGIES AGAINST EACH OTHER?
 		(even though queryParams drops out quickly)
 	once arriving at the .co/ root, all 4 technologies are managed by one component: cd-profile
 	sequence
-		each technology collects it's own version of cdProfile object
-		cd-profile is then "merged" via code inside cdProfile
+		each technology collects it's own version of profile object
+		cd-profile is then "merged" via code inside profile
 			the primary idea here is not perfection but to use the most complete version of each field available
-		the merged cdProfile is then
+		the merged profile is then
 			persisted back to each of
 				db
 				cookies
 				window
 			consumed by whatever
 	ideally the db record takes over once a user has settled into his normal usage patterns.
-		with window.cdProfile acting as the message
+		with window.profile acting as the message
 
 WHICH ELEMENTS ARE PUT IN THE CD PROFILE?
 	anything required by the UI to know how to display it's goods
@@ -122,10 +122,10 @@ ODDITIES AND DUPLICATIONS
 	- Some fields are deduped
 		properName is replaced by google's displayName
 	- some fields are maintained in two separate objects
-		window.cdProfile.emailAddress - the one they logged in with
-		window.cdProfile.email - what they created their google id with
+		window.profile.emailAddress - the one they logged in with
+		window.profile.email - what they created their google id with
 	- some are copied into multiple locations
-		window.cdProfile.uid is also in _user
+		window.profile.uid is also in _user
 	- some are stored twice, but only as a smaller version
 		cd-profile._user is a small duplicate of google user
 		this is for denormalization purposes

@@ -16,7 +16,7 @@ public class UserRepo {
     Map<String, EmailMetaRepo> emailMetaRepoMap = new HashMap<String, EmailMetaRepo>();
     Map<String, EmailLogRepo> emailLogRepoMap = new HashMap<String, EmailLogRepo>();
     Map<String, ServiceRequestRepo> serviceRequestRepoMap = new HashMap<String, ServiceRequestRepo>();
-    Map<String, CdProfileRepo> cdProfileRepoMap = new HashMap<String, CdProfileRepo>();
+    Map<String, ProfileRepo> profileRepoMap = new HashMap<String, ProfileRepo>();
     Map<String, TopicEmailsRepo> topicEmailsRepoMap = new HashMap<String, TopicEmailsRepo>();
     String userKey;
     ApplicationContext applicationContext;
@@ -88,9 +88,9 @@ public class UserRepo {
                     serviceRequestRepoMap.put(path, new ServiceRequestRepo(path));
                 }
                 break;
-            case "cdProfile":
-                if (!cdProfileRepoMap.containsKey(path)) {
-                    cdProfileRepoMap.put(path, new CdProfileRepo(path, applicationContext));
+            case "profile":
+                if (!profileRepoMap.containsKey(path)) {
+                    profileRepoMap.put(path, new ProfileRepo(path, applicationContext));
                 }
                 break;
             case "topicEmails":

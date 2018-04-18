@@ -12,7 +12,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import pull.domain.TopicLookup;
 import pull.domain.TopicName;
-import pull.domain.CdProfile;
+import pull.domain.Profile;
 import pull.domain.NewUser;
 import pull.domain.ServiceAction;
 import pull.service.TopicDayService;
@@ -66,13 +66,13 @@ public class NewUserRepo {
 		});
 	}
 
-	public void addUser(CdProfile cdProfile) {
-		createNewUser(cdProfile);
+	public void addUser(Profile profile) {
+		createNewUser(profile);
 	}
 
 
 	private void reject(NewUser newUser) {
-		DatabaseReference ref = Db.coRef("/users/" + newUser.uid + "/cdProfile");
+		DatabaseReference ref = Db.coRef("/users/" + newUser.uid + "/profile");
 		ref.removeValue();
 		removeNewUser(newUser);
 		try {
@@ -94,31 +94,29 @@ public class NewUserRepo {
 	}
 
 
-	private void createNewUser(CdProfile cdProfile) {
+	private void createNewUser(Profile profile) {
 		NewUser newUser = new NewUser();
 		newUser.dist = false;
-		newUser.email = cdProfile.emailAddress;
-		newUser.properName = cdProfile.properName;
-		newUser.uid = cdProfile.uid;
-		newUser.photoURL = cdProfile.photoURL;
-		completeTopicInfo(newUser, cdProfile.topicKey);
+		//TODO add these back in
+//		newUser.email = profile.emailAddress;
+//		newUser.properName = profile.properName;
+//		newUser.uid = profile.uid;
+//		newUser.photoURL = profile.photoURL;
+//		completeTopicInfo(newUser, profile.topicKey);
 	}
 
 	private void updateNewUser(NewUser newUser) {
-		DatabaseReference ref = Db.coRef("/users/" + newUser.uid + "/cdProfile");
+		DatabaseReference ref = Db.coRef("/users/" + newUser.uid + "/profile");
 		ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
 			@Override
 			public void onDataChange(DataSnapshot dataSnapshot) {
-				CdProfile cdProfile = dataSnapshot.getValue(CdProfile.class);
-				cdProfile.fresh = false;
-				cdProfile.admin = false;
-				cdProfile.invited = false;
-				cdProfile.pending = false;
-				if (newUser.dist) {
-					cdProfile.dist = true;
-				}
-				ref.setValue(cdProfile);
+				Profile profile = dataSnapshot.getValue(Profile.class);
+				//TODO add publisher level
+//				if (newUser.dist) {
+//					profile.dist = true;
+//				}
+				ref.setValue(profile);
 				removeNewUser(newUser);
 			}
 
@@ -153,9 +151,10 @@ public class NewUserRepo {
 		});
 	}
 
-	public void modify(CdProfile cdProfile) {
-		DatabaseReference cdProfileRef = Db.coRef("/users/" + cdProfile.uid + "/cdProfile");
-		cdProfileRef.setValue(cdProfile);
+	public void modify(Profile profile) {
+		//TODO
+//		DatabaseReference profileRef = Db.coRef("/users/" + profile.uid + "/profile");
+//		profileRef.setValue(profile);
 	}
 
 	private final String REJECTION_TEXT = "Your application to clouddancer.co was rejected,";

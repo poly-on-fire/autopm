@@ -1,30 +1,28 @@
 package pull.repo;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.context.ApplicationContext;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-
-import pull.domain.CdProfile;
+import org.springframework.context.ApplicationContext;
+import pull.domain.Profile;
 import pull.service.NewServiceRequest;
 import pull.util.Db;
 
-public class CdProfileRepo {
-	private DatabaseReference cdProfileRef;
+import java.util.HashMap;
+import java.util.Map;
+
+public class ProfileRepo {
+	private DatabaseReference profileRef;
 	private String path;
-	private Map<String, CdProfile> cdProfileMap = new HashMap<String, CdProfile>();
+	private Map<String, Profile> profileMap = new HashMap<String, Profile>();
 	private ApplicationContext applicationContext;
 	private NewServiceRequest newServiceRequest;
 
-	public CdProfileRepo(String path, ApplicationContext applicationContext) {
+	public ProfileRepo(String path, ApplicationContext applicationContext) {
 		super();
 		this.applicationContext = applicationContext;
-		cdProfileRef = Db.coRef(path);
+		profileRef = Db.coRef(path);
 		this.path = path;
 		init();
 	}
@@ -33,14 +31,14 @@ public class CdProfileRepo {
 		if (newServiceRequest == null) {
 			newServiceRequest = (NewServiceRequest) applicationContext.getBean("newServiceRequest");
 		}
-		cdProfileRef.addValueEventListener(new ValueEventListener() {
+		profileRef.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(DataSnapshot dataSnapshot) {
 				if (null != dataSnapshot.getValue()) {
-					CdProfile cdProfile = dataSnapshot.getValue(CdProfile.class);
-					if (cdProfile.pending) {
-						cdProfileMap.put(path + "/" + dataSnapshot.getKey(), cdProfile);
-						newServiceRequest.make(cdProfile);
+					Profile profile = dataSnapshot.getValue(Profile.class);
+					if (profile.promotion) {
+						profileMap.put(path + "/" + dataSnapshot.getKey(), profile);
+						newServiceRequest.make(profile);
 					}
 				}
 			}

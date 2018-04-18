@@ -15,7 +15,7 @@ this file should eventually be obsolete and deleted
  - basic blocking and tackling needs to be tested on both writes and reads from UI-db on both ends
  - public void onChildChanged(DataSnapshot dataSnapshot, - test and fulfill that
  - queryParams > cookies > db predominance
- - user-profile.setinterval could be replaced with onChange event of uid.cdProfile
+ - user-profile.setinterval could be replaced with onChange event of uid.profile
  	wonder if I could make component to component with firebase messaging?
  - still lots of package level class members to clean up???
  
