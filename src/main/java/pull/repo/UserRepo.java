@@ -18,6 +18,8 @@ public class UserRepo {
     Map<String, ServiceRequestRepo> serviceRequestRepoMap = new HashMap<String, ServiceRequestRepo>();
     Map<String, ProfileRepo> profileRepoMap = new HashMap<String, ProfileRepo>();
     Map<String, TopicEmailsRepo> topicEmailsRepoMap = new HashMap<String, TopicEmailsRepo>();
+    Map<String, SubmitRoleRepo> submitRoleRepoMap = new HashMap<String, SubmitRoleRepo>();
+    Map<String, RoleRepo> roleRepoMap = new HashMap<String, RoleRepo>();
     String userKey;
     ApplicationContext applicationContext;
 
@@ -77,9 +79,6 @@ public class UserRepo {
             case "emailContent":
                 // not interested
                 break;
-            case "role":
-                // not interested
-                break;
             case "logins":
                 // not interested
                 break;
@@ -101,6 +100,16 @@ public class UserRepo {
             case "emailMeta":
                 if (!emailMetaRepoMap.containsKey(path)) {
                     emailMetaRepoMap.put(path, new EmailMetaRepo(path, applicationContext));
+                }
+                break;
+            case "submitRole":
+                if (!submitRoleRepoMap.containsKey(path)) {
+                    submitRoleRepoMap.put(path, new SubmitRoleRepo(path, applicationContext));
+                }
+                break;
+            case "role":
+                if (!roleRepoMap.containsKey(path)) {
+                    roleRepoMap.put(path, new RoleRepo(path, applicationContext));
                 }
                 break;
             default:

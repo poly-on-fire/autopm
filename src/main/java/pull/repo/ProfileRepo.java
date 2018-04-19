@@ -38,7 +38,7 @@ public class ProfileRepo {
 					Profile profile = dataSnapshot.getValue(Profile.class);
 					if (profile.promotion) {
 						profileMap.put(path + "/" + dataSnapshot.getKey(), profile);
-						newServiceRequest.make(profile);
+						newServiceRequest.make(profile, path);
 					}
 				}
 			}

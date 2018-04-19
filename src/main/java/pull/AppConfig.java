@@ -16,7 +16,7 @@ import pull.camel.TimedWebDeployRoutes;
 import pull.repo.EmailLogRepo;
 import pull.repo.EmailStartRepo;
 import pull.repo.EmailVerifyUnsubscribeRepo;
-import pull.repo.NewUserRepo;
+import pull.repo.SubmitRoleRepo;
 import pull.repo.ServiceActionRepo;
 import pull.repo.UsersRepo;
 import pull.service.MessageUtils;
@@ -72,11 +72,6 @@ public class AppConfig implements ApplicationContextAware {
 	@Bean
 	public MessageUtils autosponderUtils() {
 		return new MessageUtils();
-	}
-
-	@Bean
-	public NewUserRepo newUserRepo() {
-		return new NewUserRepo();
 	}
 
 	@Bean
