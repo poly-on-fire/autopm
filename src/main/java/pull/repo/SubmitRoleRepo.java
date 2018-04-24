@@ -1,8 +1,6 @@
 package pull.repo;
 
 import com.google.firebase.database.*;
-import com.google.firebase.database.core.Path;
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.springframework.context.ApplicationContext;
 import pull.domain.Role;
 import pull.domain.SubmitRole;
