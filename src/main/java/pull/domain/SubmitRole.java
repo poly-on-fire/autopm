@@ -29,7 +29,8 @@ public class SubmitRole {
 				", timestamp=" + timestamp +
 				", userProvider='" + userProvider + '\'' +
 				", date='" + date + '\'' +
-				", role=" + role.toString() +
+				", processed='" + processed + '\'' +
+				", role=" + ((role==null)? "null" : role.toString()) +
 				'}';
 	}
 }

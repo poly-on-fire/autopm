@@ -1,15 +1,23 @@
 package pull.repo;
 
 import com.google.firebase.database.*;
+import com.google.firebase.database.core.Path;
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.springframework.context.ApplicationContext;
 import pull.domain.Role;
 import pull.domain.SubmitRole;
 import pull.util.Db;
 
+/*
+This entire class is a total effing throw-away planning on replacing it with JWT system later
+there's a lot of stuff here that is stupid and illogical but just leaving it here because
+it's going to be replaced with something more rational.
+ */
 public class SubmitRoleRepo {
     private DatabaseReference submitRoleRef;
     private String path;
     private ApplicationContext applicationContext;
+
 
     public SubmitRoleRepo(String path, ApplicationContext applicationContext) {
         super();
@@ -21,12 +29,24 @@ public class SubmitRoleRepo {
 
 
     private void init() {
+
         submitRoleRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-                SubmitRole submitRole = dataSnapshot.getValue(SubmitRole.class);
-                System.out.println(submitRole.toString());
-                something(submitRole);
+                SubmitRole submitRole = null;
+                try {
+                    submitRole = dataSnapshot.getValue(SubmitRole.class);
+                    if (submitRole.uid != null) {
+                        processSubmittal(submitRole,dataSnapshot.getKey());
+                    } else {
+                        //TODO log properly
+                        //these happened before then quit happening not sure why but still keeping an eye out
+                        System.out.println("\n\nWEIRD FAIL\n" + "\nDATA SNAPSHOT\n" + dataSnapshot.toString() + "\nPATH\n" + path + "\nSUBMITROLE\n" + submitRole);
+                    }
+                } catch (Exception e) {
+                    //TODO log properly
+                    System.out.println("\n\nWEIRD EXCEPTION\n" + e.getMessage() + "\nDATA SNAPSHOT\n" + dataSnapshot.toString() + "\nPATH\n" + path + "\nSUBMITROLE\n" + submitRole);
+                }
             }
 
             @Override
@@ -51,156 +71,30 @@ public class SubmitRoleRepo {
         });
     }
 
-	private void something(SubmitRole submitRole) {
-		DatabaseReference ref = Db.coRef("/users/" + submitRole.uid );
-		ref.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void processSubmittal(SubmitRole submitRole, String key) {
+        DatabaseReference ref = Db.coRef("/users/" + submitRole.uid);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
-			@Override
-			public void onDataChange(DataSnapshot dataSnapshot) {
-			    if(!dataSnapshot.child("role").exists()&&!submitRole.processed){
-                    ref.child("role").setValue(submitRole.role);
-                    submitRole.processed=true;
-                    ref.child("submitRole").setValue(submitRole);
-//                    TODO add some of the fields from submitRole to profile as fields
-                    //TODO maybe dedupe the submitRole stuff especially if same day same values
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.child("role").exists() && !submitRole.processed && submitRole.uid != null) {
+                    String itemPath =  dataSnapshot.getRef().getPath() +"/submitRole/" +  key;
+                    try {
+                        DatabaseReference submitRoleRef = Db.coRef(itemPath);
+                        submitRoleRef.child("processed").setValue(true);
+                        ref.child("role").setValue(submitRole.role);
+                    } catch (Exception e) {
+                        //TODO log properly
+                        System.out.println("PLEASE INVESTIGATE STACK TRACE");
+                        e.printStackTrace();
+                    }
                 }
-			}
+            }
 
-			@Override
-			public void onCancelled(DatabaseError arg0) {
-			}
-		});
-	}
-
-    private void somethingMore(Role role){
-        System.out.println("ABOUT TO ADD "+ role.toString());
+            @Override
+            public void onCancelled(DatabaseError arg0) {
+            }
+        });
     }
-
-    //cruft leftover from it's previous usage as NewUserRepo
-//	private void init() {
-//		submitRoleRef.addChildEventListener(new ChildEventListener() {
-//
-//			@Override
-//			public void onCancelled(DatabaseError dataSnapshot) {
-//			}
-//
-//			@Override
-//			public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-//			}
-//
-//			@Override
-//			public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-//				SubmitRole submitRole = dataSnapshot.getValue(SubmitRole.class);
-//				System.out.println(submitRole.toString());
-////				if (submitRole.done && !submitRole.reject) {
-////					process(submitRole);
-////				} else if (submitRole.done && submitRole.reject) {
-////					reject(submitRole);
-////				}
-//			}
-//
-//			@Override
-//			public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
-//			}
-//
-//			@Override
-//			public void onChildRemoved(DataSnapshot dataSnapshot) {
-//			}
-//		});
-//	}
-
-//	public void addUser(Profile profile) {
-//		createNewUser(profile);
-//	}
-//
-//
-//	private void reject(SubmitRole submitRole) {
-//		DatabaseReference ref = Db.coRef("/users/" + submitRole.uid + "/profile");
-//		ref.removeValue();
-//		removeNewUser(submitRole);
-//		try {
-//			sendEmail.go(emailFrom, "Support at pullModel.com", submitRole.email, REJECTION_TEXT,
-//					"New User Rejected:");
-//		} catch (Exception e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
-//
-//	private void process(SubmitRole submitRole) {
-//		updateNewUser(submitRole);
-//		try {
-//			sendEmail.go(emailFrom, "Support at pullModel.com", submitRole.email, ACCEPTANCE_TEXT,
-//					"Welcome!");
-//		} catch (Exception e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
-//
-//
-//	private void createNewUser(Profile profile) {
-//		SubmitRole submitRole = new SubmitRole();
-//		submitRole.dist = false;
-//		//TODO add these back in
-////		submitRole.email = profile.emailAddress;
-////		submitRole.properName = profile.properName;
-////		submitRole.uid = profile.uid;
-////		submitRole.photoURL = profile.photoURL;
-////		completeTopicInfo(submitRole, profile.topicKey);
-//	}
-//
-//	private void updateNewUser(SubmitRole submitRole) {
-//		DatabaseReference ref = Db.coRef("/users/" + submitRole.uid + "/profile");
-//		ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//
-//			@Override
-//			public void onDataChange(DataSnapshot dataSnapshot) {
-//				Profile profile = dataSnapshot.getValue(Profile.class);
-//				//TODO add publisher level
-////				if (submitRole.dist) {
-////					profile.dist = true;
-////				}
-//				ref.setValue(profile);
-//				removeNewUser(submitRole);
-//			}
-//
-//			@Override
-//			public void onCancelled(DatabaseError arg0) {
-//			}
-//		});
-//	}
-//
-//	private void removeNewUser(SubmitRole submitRole) {
-//		DatabaseReference newUserRef = Db.coRef("/submitRole/" + submitRole.uid);
-//		newUserRef.removeValue();
-//	}
-//
-//	private void completeTopicInfo(SubmitRole submitRole, String topicKey) {
-//		DatabaseReference ref = Db.coRef("/topicLookup/" + topicKey);
-//		ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//
-//			@Override
-//			public void onDataChange(DataSnapshot dataSnapshot) {
-//				if (null != dataSnapshot.getValue()) {
-//					TopicLookup topicLookup = dataSnapshot.getValue(TopicLookup.class);
-//					submitRole.sponsorName = topicLookup.sponsorName;
-//					submitRole.sponsorNsId = topicLookup.sponsorNsId;
-//					newUserRef.child(submitRole.uid).setValue(submitRole);
-//				}
-//			}
-//
-//			@Override
-//			public void onCancelled(DatabaseError arg0) {
-//			}
-//		});
-//	}
-//
-//	public void modify(Profile profile) {
-//		//TODO
-////		DatabaseReference profileRef = Db.coRef("/users/" + profile.uid + "/profile");
-////		profileRef.setValue(profile);
-//	}
-//
-//	private final String REJECTION_TEXT = "Your application to clouddancer.co was rejected,";
-//	private final String ACCEPTANCE_TEXT = "Welcome to clouddancer.co! You should now be able to use this app.";
 
 }
