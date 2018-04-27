@@ -3,6 +3,7 @@ package pull.camel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.context.ApplicationContext;
 
+//	TODO: Bettter comment to explain what this class does. It's only for velocity templates in creation of pages, and it does not do any cleanup, and it is possibly named poorly
 public class PullRoutes extends RouteBuilder {
     ApplicationContext applicationContext;
 

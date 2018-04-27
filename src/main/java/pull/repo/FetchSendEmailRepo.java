@@ -49,10 +49,10 @@ public class FetchSendEmailRepo {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 EmailContent emailContent = dataSnapshot.getValue(EmailContent.class);
-                System.err.println(emailFrom + "Pete Carapetyan" + " " + emailStart.getEmailAddress() + " "
+                System.err.println(emailFrom + System.getenv("EMAIL_FROM_NAME") + " " + emailStart.getEmailAddress() + " "
                         + emailContent.getEmailBody() + " " + emailContent.getSubject());
                 try {
-                    sendEmail.go(emailFrom, "Support at clouddancer.co", emailStart.getEmailAddress(),
+                    sendEmail.go(emailFrom, System.getenv("EMAIL_FROM_NAME"), emailStart.getEmailAddress(),
                             emailContent.getEmailBody(), emailContent.getSubject());
                 } catch (Exception e) {
                     System.err.println("WOOPS");

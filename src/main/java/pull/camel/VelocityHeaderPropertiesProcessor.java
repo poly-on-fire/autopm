@@ -6,6 +6,7 @@ import java.net.URLDecoder;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
+//	TODO: Comment to the effect that this is just a helper class for velocity templates
 public class VelocityHeaderPropertiesProcessor implements Processor {
 
 	@Override

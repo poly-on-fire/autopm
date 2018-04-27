@@ -78,7 +78,7 @@ public class SendEmailVerifyEmail {
 						message = getSingleWebPageMessage(emailLog);
 					}
 					try {
-						sendEmail.go("verify@clouddancer.info", "cloudDancer.info Server", emailLog.getEmailAddress(), message, "Please click to verify your email.");
+						sendEmail.go(System.getenv("EMAIL_NOREPLY"), System.getenv("EMAIL_FROM_NAME"), emailLog.getEmailAddress(), message, "Please click to verify your email.");
 					}catch (Exception e){
 					    //TODO logging instead of sysout
 						System.out.println(e.getMessage());

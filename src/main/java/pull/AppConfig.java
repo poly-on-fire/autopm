@@ -40,6 +40,7 @@ public class AppConfig implements ApplicationContextAware {
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
+		//TODO document these as dev related startup variables
 		runNaked = Boolean.valueOf(applicationContext.getEnvironment().getProperty("run.naked"));
 		devSeed = Boolean.valueOf(applicationContext.getEnvironment().getProperty("dev.seed"));
 	}
@@ -76,6 +77,7 @@ public class AppConfig implements ApplicationContextAware {
 
 	@Bean
 	public NewServiceRequest newServiceRequest() {
+		//TODO rename
 		return new NewServiceRequest();
 	}
 
@@ -114,21 +116,25 @@ public class AppConfig implements ApplicationContextAware {
 		return new DevSeed(applicationContext);
 	}
 
+	//TODO explain that this is for running the camel routes. This is one of the coolest parts of this app but also since camel is not universally understood one of the most potentially confusing
 	@Bean
 	public CommandLineRunner go(ApplicationContext ctx) throws Exception {
 		return (args) -> {
 			org.apache.camel.main.Main main = new org.apache.camel.main.Main();
+			//TODO explain
 			if (!runNaked) {
 				main.addRouteBuilder(new PullRoutes(ctx));
 				main.addRouteBuilder(new TimedWebDeployRoutes(ctx));
 				main.addRouteBuilder(new DailyEmailRoutes(ctx));
 			}
-			/*
-			 * Attempting to figure out when beans are written
-			 */
 			if(devSeed) {
+				//TODO explain
 				main.addRouteBuilder(new DevSeedRoutes(ctx));
 			}
+//			TODO this could also be parameterized and make it much easier to work with at startup
+//			/*
+//			 * Attempting to figure out when beans are written
+//			 */
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
 			for (String beanName : beanNames) {

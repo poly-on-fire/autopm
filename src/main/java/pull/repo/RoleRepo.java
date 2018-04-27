@@ -56,10 +56,6 @@ public class RoleRepo {
 		newRoleLookupRef.setValue(role);
 	}
 
-//	public void update(String key, EmailMeta emailMeta) {
-//		emailMetaRef.child(key).setPriority(emailMeta);
-//	}
-
 	public void delete(String key) {
 		roleRef.child(key).removeValue();
 	}

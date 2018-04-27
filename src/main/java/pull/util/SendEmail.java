@@ -5,6 +5,10 @@ import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.mail.internet.InternetAddress;
+import java.util.ArrayList;
+import java.util.Collection;
+
 @Service
 public class SendEmail {
     @Value("${EMAIL_HOST_NAME}")
@@ -30,12 +34,32 @@ public class SendEmail {
         email.send();
     }
 
-    public void devTest(String emailHostName, int emailPort, String emailServer, String emailAuth, String fromEmail,
+    public void goWReplyTo(String replyTo, String fromEmail, String fromName, String to, String msg, String subject) throws Exception {
+        InternetAddress internetAddress = new InternetAddress(replyTo);
+        Collection<InternetAddress> replyTos = new ArrayList<InternetAddress>();
+        replyTos.add(internetAddress);
+
+        HtmlEmail email = new HtmlEmail();
+        email.setHostName(emailHostName);
+        email.setSmtpPort(emailPort);
+        email.setAuthenticator(new DefaultAuthenticator(emailServer, emailAuth));
+        email.setSSLOnConnect(true);
+        email.setFrom(fromEmail, fromName);
+        email.setSubject(subject);
+        email.setHtmlMsg(msg);
+        email.setTextMsg("Your email client does not support HTML messages");
+        email.setReplyTo(replyTos);
+        email.addTo(to);
+        email.send();
+    }
+
+
+    public void devTest(String replyTo, String emailHostName, int emailPort, String emailServer, String emailAuth, String fromEmail,
                         String fromName, String to, String msg, String subject) throws Exception {
         this.emailHostName = emailHostName;
         this.emailPort = emailPort;
         this.emailServer = emailServer;
         this.emailAuth = emailAuth;
-        go(fromEmail, fromName, to, msg, subject);
+        goWReplyTo(replyTo, fromEmail, fromName, to, msg, subject);
     }
 }

@@ -77,16 +77,3 @@ public class TopicTypeRepo {
 	}
 
 }
-
-// ref.addValueEventListener(new ValueEventListener() {
-// @Override
-// public void onDataChange(DataSnapshot dataSnapshot) {
-// TopicType topicType = dataSnapshot.getValue(TopicType.class);
-// list.add(topicType);
-// }
-//
-// @Override
-// public void onCancelled(DatabaseError databaseError) {
-// System.err.println("The read failed: " + databaseError.getCode());
-// }
-// });

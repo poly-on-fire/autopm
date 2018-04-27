@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationContext;
 import pull.service.DailyEmail;
 import pull.service.DevSeed;
 
+
+//	TODO: Comment this to explain that it only runs from IDE in one-of configuration?
 public class DevSeedRoutes extends RouteBuilder {
 	ApplicationContext applicationContext;	
 	DailyEmail dailyEmail;

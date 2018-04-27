@@ -65,15 +65,6 @@ public class EmailStartRepo {
 		newEmailTopicDateByRef.setValue(emailStart);
 	}
 
-//	public void add(String emailAddress, String topicKey, String date, String by) {
-//		EmailStart emailStart = new EmailStart(emailAddress, topicKey, date, by);
-//	}
-
-
-//	public void update(String key, EmailStart emailStart) {
-////		emailStartRef.child(key).setPriority(emailStart);
-//	}
-
 	public void delete(String key) {
 		emailStartRef.child(key).removeValue();
 	}

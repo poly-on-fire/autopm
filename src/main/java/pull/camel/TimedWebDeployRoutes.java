@@ -11,6 +11,10 @@ import org.springframework.context.ApplicationContext;
 
 import pull.service.DeployCheck;
 
+//	TODO: Need comment to explain that this is only for deploying freshly created pages into wherever they are being deployed
+// this is currently deployed to firebase and infoclouddancer but that could be changed
+// advantages to current setup is 1. easy 2. many monitoring facilities of google
+// disadvantages to current setup include the fact that there is no cleanup when something is already deployed, also no cleanup when something deleted from db
 public class TimedWebDeployRoutes extends RouteBuilder {
 	DeployCheck deployCheck;
 

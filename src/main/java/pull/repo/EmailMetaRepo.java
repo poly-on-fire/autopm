@@ -63,15 +63,6 @@ public class EmailMetaRepo {
 		topicDayService.upsertEmailMeta(emailMetaPath, emailMeta);
 	}
 
-//	public void add(EmailMeta emailMeta) {
-//		DatabaseReference newEmailLookupRef = emailMetaRef.push();
-//		newEmailLookupRef.setValue(emailMeta);
-//	}
-//
-//	public void update(String key, EmailMeta emailMeta) {
-//		emailMetaRef.child(key).setPriority(emailMeta);
-//	}
-
 	public void delete(String key) {
 		emailMetaRef.child(key).removeValue();
 	}

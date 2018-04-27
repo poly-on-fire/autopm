@@ -1,8 +1,8 @@
-package pull.dbinit;
+package pull.cruft;
 
-import pull.domain.TopicType;
 import pull.repo.TopicTypeRepo;
 
+//	TODO: Comment - one of several dev-oriented cruft pieces that are not being used but were so handy that I wanted to leave as a how-to
 public class InitializeTopicType {
 	public void go() {
 		/*

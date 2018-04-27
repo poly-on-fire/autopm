@@ -2,6 +2,7 @@ package pull.domain;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+//TODO what is this used for? What about the extra commented out properties? etc etc
 @IgnoreExtraProperties
 public class User {
 //	private HashMap<String, Object> topic;

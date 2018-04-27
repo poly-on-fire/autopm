@@ -64,14 +64,6 @@ public class ServiceActionRepo {
 		newEmailTopicDateByRef.setValue(serviceAction);
 	}
 
-//	public void add(String emailAddress, String topicKey, String date, String by) {
-//		ServiceAction serviceAction = new ServiceAction(emailAddress, topicKey, date, by);
-//	}
-
-
-//	public void update(String key, ServiceAction serviceAction) {
-////		serviceActionRef.child(key).setPriority(serviceAction);
-//	}
 
 	public void delete(String key) {
 		serviceActionRef.child(key).removeValue();
