@@ -104,8 +104,7 @@ public class TopicDayServiceTest {
 		// 170316, 170309, 170306, 170305, 170304, 170407, 170326
 		assertTrue(emailsOut.size() == 7);
 		for (EmailOut emailOut : emailsOut) {
-			System.out.println(emailOut);
-//			assertTrue("170316, 170309, 170306, 170305, 170304, 170407, 170326".contains(emailOut.getDate()));
+			assertTrue("170316, 170309, 170306, 170305, 170304, 170407, 170326".contains(emailOut.getDate()));
 		}
 	}
 	
