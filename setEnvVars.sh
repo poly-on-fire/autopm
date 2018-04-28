@@ -5,6 +5,6 @@ export EMAIL_HOST_NAME="smtp.foobar.com"
 export EMAIL_PORT="25"
 export EMAIL_SERVER="foobar62"
 export EMAIL_NOREPLY="noreply@foobar.com"
-export EMAIL_FROM_NAME="foobar
+export EMAIL_FROM_NAME="foobar"
 export EMAIL_ADMIN="foo@bar.com"
 export EMAIL_REPLYTO="bar@barfoo.com"

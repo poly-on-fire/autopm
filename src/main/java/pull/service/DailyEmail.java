@@ -1,5 +1,6 @@
 package pull.service;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class DailyEmail {
 		topicDayService.printTopicDaysMap();
 		Collection<EmailStart> emailStarts = (Collection<EmailStart>) topicDayService.getEmailStarts().values();
 		for (EmailStart emailStart : emailStarts) {
-			List<EmailOut> emailsOut = topicDayService.todaysEmail(emailStart);
+			List<EmailOut> emailsOut = topicDayService.todaysEmail(emailStart, LocalDate.now());
 			for (EmailOut emailOut : emailsOut) {
 				new FetchSendEmailRepo(emailFrom, emailOut, emailStart, sendEmail);
 			}

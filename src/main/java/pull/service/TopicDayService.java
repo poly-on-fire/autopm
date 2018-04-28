@@ -3,11 +3,7 @@ package pull.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.print.CancelablePrintJob;
 
@@ -62,34 +58,34 @@ public class TopicDayService {
 		feedDay(topicDay);
 	}
 
-	public List<EmailOut> whatComingDays(EmailStart emailStart) {
-		return dayRange(emailStart, false);
+	public List<EmailOut> whatComingDays(EmailStart emailStart, LocalDate thisDate) {
+		return dayRange(emailStart, false, thisDate);
 	}
 
-	public List<EmailOut> todaysEmail(EmailStart emailStart) {
-		return dayRange(emailStart, true);
+	public List<EmailOut> todaysEmail(EmailStart emailStart, LocalDate thisDate) {
+		return dayRange(emailStart, true, thisDate);
 	}
 
 	public Map<String, EmailStart> getEmailStarts() {
 		return emailStartMap;
 	}
 
-	private List<EmailOut> dayRange(EmailStart emailStart, boolean isTodayNotFuture) {
-		int days = elapsedDays(emailStart);
+	private List<EmailOut> dayRange(EmailStart emailStart, boolean isTodayNotFuture, LocalDate thisDate) {
+		int days = elapsedDays(emailStart, thisDate);
 		Map<String, TopicDay> topicDayMap = fetchTopicDayMap(emailStart.getTopicKey());
 		List<EmailOut> emails = new ArrayList<EmailOut>();
 		for (TopicDay topicDay : topicDayMap.values()) {
 			if ((isTodayNotFuture && isToday(days, topicDay))
 					|| (!isTodayNotFuture && isComingDay(days, topicDay))) {
-				addEmailsToEmailOut(emails, emailStart, topicDay, days);
+				addEmailsToEmailOut(emails, emailStart, topicDay, days, thisDate);
 			}
 		}
 		return emails;
 	}
 
-	private void addEmailsToEmailOut(List<EmailOut> emails, EmailStart emailStart, TopicDay topicDay, int days) {
+	private void addEmailsToEmailOut(List<EmailOut> emails, EmailStart emailStart, TopicDay topicDay, int days, LocalDate thisDate) {
 		emails.add(new EmailOut(emailStart.getEmailAddress(), topicDay.getEmailKey(), emailStart.getTopicKey(),
-				null, dateFuture(topicDay.getDay() - days, LocalDate.now())));
+				null, dateFuture(topicDay.getDay() - days, thisDate)));
 	}
 
 	private boolean isComingDay(int days, TopicDay topicDay) {
@@ -116,10 +112,10 @@ public class TopicDayService {
 	/*
 	 * dateToday externalized as argument for testing purposes only
 	 */
-	int elapsedDays(EmailStart emailStart) {
+	int elapsedDays(EmailStart emailStart, LocalDate thisDate) {
 		String zeroDay = emailStart.getDate();
 		LocalDate zeroDate = LocalDate.parse(zeroDay, DateTimeFormatter.ofPattern("yyMMdd"));
-		long diffInDays = ChronoUnit.DAYS.between(zeroDate, LocalDate.now());
+		long diffInDays = ChronoUnit.DAYS.between(zeroDate, thisDate);
 		return (int) diffInDays;
 	}
 
