@@ -13,12 +13,8 @@ import pull.camel.PullRoutes;
 import pull.camel.DailyEmailRoutes;
 import pull.camel.DevSeedRoutes;
 import pull.camel.TimedWebDeployRoutes;
-import pull.repo.EmailLogRepo;
-import pull.repo.EmailStartRepo;
-import pull.repo.EmailVerifyUnsubscribeRepo;
-import pull.repo.SubmitRoleRepo;
-import pull.repo.ServiceActionRepo;
-import pull.repo.UsersRepo;
+import pull.domain.UnsubscribeLog;
+import pull.repo.*;
 import pull.service.MessageUtils;
 import pull.service.TopicDayService;
 import pull.service.DailyEmail;
@@ -63,6 +59,11 @@ public class AppConfig implements ApplicationContextAware {
 	@Bean
 	public EmailVerifyUnsubscribeRepo emailVerifyUnsubscribeRepo() {
 		return new EmailVerifyUnsubscribeRepo();
+	}
+
+	@Bean
+	public UnsubscribeLogRepo unsubscribeLogRepo() {
+		return new UnsubscribeLogRepo();
 	}
 
 	@Bean

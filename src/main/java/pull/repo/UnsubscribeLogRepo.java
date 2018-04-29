@@ -9,14 +9,14 @@ import pull.domain.UnsubscribeLog;
 import pull.service.SendEmailVerifyEmail;
 import pull.util.Db;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UnsubscribeLogRepo {
     DatabaseReference unsubscribeLogRef = Db.coRef("unsubscribeLog");
-    Map<String, UnsubscribeLog> unsubscribeLogMap = new HashMap<String, UnsubscribeLog>();
-    @Autowired
-    private SendEmailVerifyEmail sendEmailVerifyEmail;
+    static List<String> unsubscribes = new ArrayList<String>();
 
     public UnsubscribeLogRepo() {
         super();
@@ -30,6 +30,7 @@ public class UnsubscribeLogRepo {
 
                 UnsubscribeLog unsubscribeLog = dataSnapshot.getValue(UnsubscribeLog.class);
                 if (unsubscribeLog != null) {
+                    unsubscribes.add(unsubscribeLog.getEmailAddress());
                 } else {
                     System.err.println("YOU HAVE A NULL EMAIL, DICK");
                     System.err.println("WAS" + dataSnapshot.getValue());
@@ -54,5 +55,12 @@ public class UnsubscribeLogRepo {
             public void onCancelled(DatabaseError var1) {
             }
         });
+    }
+    public static boolean contains(String emailAddress){
+        if(unsubscribes.contains(emailAddress)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
