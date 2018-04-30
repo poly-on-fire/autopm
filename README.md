@@ -1,4 +1,6 @@
-"poly-on-fire" is a collection of experimental projects using [Polymer](href="https://www.polymer-project.org/") + [Firebase](href="https://firebase.google.com/")
+*poly-on-fire* is a collection of proof-of-concept projects using:
+
+ [Polymer](href="https://www.polymer-project.org/") + [Firebase](href="https://firebase.google.com/")
 
 |[**_Pete Carapetyan_**](http://appwriter.com)|  [TL;DR? blog](https://betterologist.net/2018/04/poly-on-fire-polymer-on-firebase/) |[TL;DR? _video:_](https://youtu.be/P9DwkqqUxNs)|
 | --- | --- | --- |
@@ -6,6 +8,8 @@
 
 
 ##### A project for learning an aspect of developing a Polymer app, deployed on Firebase hosting.
+
+The idea is to prove out an approach or component in the simplest project first, before combining it with other code in a real project.
 
 ----
 
