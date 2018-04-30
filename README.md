@@ -1,6 +1,4 @@
-*poly-on-fire* is a collection of proof-of-concept projects using:
-
- [Polymer](href="https://www.polymer-project.org/") + [Firebase](href="https://firebase.google.com/")
+*poly-on-fire* is a collection of proof-of-concept projects using [Polymer](https://www.polymer-project.org/) and [Firebase](https://firebase.google.com/)
 
 |[**_Pete Carapetyan_**](http://appwriter.com)|  [TL;DR? blog](https://betterologist.net/2018/04/poly-on-fire-polymer-on-firebase/) |[TL;DR? _video:_](https://youtu.be/P9DwkqqUxNs)|
 | --- | --- | --- |
