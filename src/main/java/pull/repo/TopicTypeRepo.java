@@ -14,6 +14,8 @@ import pull.domain.TopicTypeFaq;
 import pull.util.Db;
 
 public class TopicTypeRepo {
+	//TODO sober look at whether this class is ever even used in any real way? Methinks not
+
 	DatabaseReference topicTypeRef = Db.coRef("topicType");
 	DatabaseReference topicTypeFaqRef = Db.coRef("topicTypeFaq");
 	Map<String, TopicType> map = new HashMap<String, TopicType>();

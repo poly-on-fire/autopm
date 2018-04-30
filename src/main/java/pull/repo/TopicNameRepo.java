@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import pull.domain.TopicName;
 import pull.util.Db;
 
+// TODO why do I have this class? So I build a list of topics for that user, but to what end? Who looks at it?
 public class TopicNameRepo {
 	DatabaseReference topicNameRef;
 	String path;
@@ -28,7 +29,7 @@ public class TopicNameRepo {
 			public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 TopicName topicName = dataSnapshot.getValue(TopicName.class);
                 topicNameMap.put(path+"/"+dataSnapshot.getKey(), topicName);
-                System.err.println(topicName);
+//                System.err.println(topicName);
 			}
 
 			@Override

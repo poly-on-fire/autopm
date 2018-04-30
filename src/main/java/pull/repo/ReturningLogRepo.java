@@ -15,8 +15,6 @@ import java.util.Map;
 public class ReturningLogRepo {
     DatabaseReference returningLogRef = Db.coRef("returningLog");
     Map<String, ReturningLog> returningLogMap = new HashMap<String, ReturningLog>();
-    @Autowired
-    private SendEmailVerifyEmail sendEmailVerifyEmail;
 
     public ReturningLogRepo() {
         super();
@@ -28,8 +26,20 @@ public class ReturningLogRepo {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 ReturningLog returningLog = dataSnapshot.getValue(ReturningLog.class);
+                // TODO: figure out what the easiest approach is, and do that
+                // you could just let anyone log in and then if no topic id they can't do anything?
+                // for security purposes you have to send them a link nothing else is secure
+//                remind the user it must be the same email address that the original verification was sent to
+//                emailStart is how you look it up, index it by emailAddress
+//                or when user and profile and ... created add email to a global /email cross referenced by userId
+//                also how to keep this in a separate aaa component that still has no name
+//                then when returning is found,
+//                        either
+//                send them another link by email
+
                 if (returningLog != null) {
                 } else {
+                    // TODO error handling?
                     System.err.println("YOU HAVE A NULL EMAIL, DICK");
                     System.err.println("WAS" + dataSnapshot.getValue());
                 }

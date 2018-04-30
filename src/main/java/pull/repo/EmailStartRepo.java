@@ -5,6 +5,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pull.domain.EmailStart;
 import pull.service.TopicDayService;
@@ -13,6 +14,8 @@ import pull.util.Db;
 
 @Service
 public class EmailStartRepo {
+    @Value("${run.naked}")
+    private boolean runNaked;
 
     DatabaseReference emailStartRef;
     String path = "emailStart";
@@ -27,6 +30,10 @@ public class EmailStartRepo {
     }
 
     private void init() {
+        // TODO this fails to be true when set, fix that, but not very high priority
+        if(runNaked) {
+            return;
+        }
         emailStartRef.addChildEventListener(new ChildEventListener() {
 
             @Override

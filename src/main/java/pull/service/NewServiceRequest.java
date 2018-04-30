@@ -13,8 +13,6 @@ import pull.util.SendEmail;
 public class NewServiceRequest {
 	@Autowired
 	ServiceActionRepo serviceActionRepo;
-//	@Autowired
-//	SubmitRoleRepo submitRoleRepo;
 	@Autowired
 	SendEmail sendEmail;
 	@Value("${run.naked}")

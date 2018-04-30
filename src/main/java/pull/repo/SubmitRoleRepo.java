@@ -7,6 +7,7 @@ import pull.domain.SubmitRole;
 import pull.util.Db;
 
 /*
+TODO:
 This entire class is a total effing throw-away planning on replacing it with JWT system later
 there's a lot of stuff here that is stupid and illogical but just leaving it here because
 it's going to be replaced with something more rational.

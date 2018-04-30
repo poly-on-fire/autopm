@@ -36,6 +36,7 @@ public class ServiceRequestRepo {
 			public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 ServiceRequest serviceRequest = dataSnapshot.getValue(ServiceRequest.class);
                 serviceRequestMap.put(path+"/"+dataSnapshot.getKey(), serviceRequest);
+//                TODO send an email to admin?
                 System.err.println(serviceRequest);
 			}
 

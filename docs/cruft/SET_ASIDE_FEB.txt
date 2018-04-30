@@ -1,3 +1,4 @@
+
  - UI for adding someone's email to my topic
  - add feature later that makes sure people aren't getting too many emails a day
  - fix display of extract values in the UI

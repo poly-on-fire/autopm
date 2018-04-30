@@ -32,6 +32,7 @@ public class UnsubscribeLogRepo {
                 if (unsubscribeLog != null) {
                     unsubscribes.add(unsubscribeLog.getEmailAddress());
                 } else {
+                    //TODO real error handling
                     System.err.println("YOU HAVE A NULL EMAIL, DICK");
                     System.err.println("WAS" + dataSnapshot.getValue());
                 }

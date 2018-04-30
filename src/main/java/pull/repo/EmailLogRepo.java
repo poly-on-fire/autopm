@@ -41,6 +41,7 @@ public class EmailLogRepo {
 					sendEmailVerifyEmail.go(emailLog);
 					writeAndDelete(emailLog, dataSnapshot.getKey());
 				} else {
+					//TODO meaningful error handling
 					System.err.println("YOU HAVE A NULL EMAIL, DICK");
 					System.err.println("WAS" + dataSnapshot.getValue());
 				}
@@ -48,8 +49,7 @@ public class EmailLogRepo {
 
 			@Override
 			public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-				EmailLog emailLog = dataSnapshot.getValue(EmailLog.class);
-				// map.put(dataSnapshot.getKey(), emailLog);
+				//TODO is there ever a chance that this would change once created?
 			}
 
 			@Override

@@ -23,6 +23,7 @@ public class DeploymentProcessor implements Processor {
 	 * if DeployCheck.hasStuffToDeploy() then creates a new template to do just
 	 * that
 	 */
+	//TODO once deployed, it would be smart to delete those properties files which got both generated from, and deployed
 	@Override
 	public void process(Exchange exchange) throws Exception {
 		if (deployCheck.hasPageToDeploy()) {

@@ -1,4 +1,4 @@
-package pull.repo;
+package pull.cruft;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,6 +55,7 @@ public class FetchSendEmailRepo {
                     sendEmail.go(emailFrom, System.getenv("EMAIL_FROM_NAME"), emailStart.getEmailAddress(),
                             emailContent.getEmailBody(), emailContent.getSubject());
                 } catch (Exception e) {
+                    //TODO real error handling
                     System.err.println("WOOPS");
                     e.printStackTrace();
                 }

@@ -1,5 +1,0 @@
-- verify that NSID is good
-- check off approval checkbox in UI
-- re-import the onboarding page from nuskin site
-- manually adjust proper name in case they put something jive in
-- add john.smith to mail from clouddancer.info in panel.dreamhost

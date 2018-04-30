@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import pull.domain.EmailOut;
 import pull.domain.EmailStart;
-import pull.repo.FetchSendEmailRepo;
+import pull.cruft.FetchSendEmailRepo;
 import pull.util.SendEmail;
 
 @Service
@@ -19,15 +19,10 @@ public class DailyEmail {
 	private TopicDayService topicDayService;
 	@Autowired
 	SendEmail sendEmail;
-	@Value("${run.naked}")
-	private boolean runNaked;
 	@Value("${EMAIL_FROM}")
 	private String emailFrom;
 
 	public void send() {
-//		if(runNaked) {
-//			return;
-//		}
 		/*
 		 * This should seem confusing because it is getting a list of emails for
 		 * one day for one topic for one email address. Although this is

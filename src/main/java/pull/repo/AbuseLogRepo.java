@@ -15,8 +15,6 @@ import java.util.Map;
 public class AbuseLogRepo {
     DatabaseReference abuseLogRef = Db.coRef("abuseLog");
     Map<String, AbuseLog> abuseLogMap = new HashMap<String, AbuseLog>();
-    @Autowired
-    private SendEmailVerifyEmail sendEmailVerifyEmail;
 
     public AbuseLogRepo() {
         super();

@@ -33,8 +33,7 @@ public class ProductCategoryRepo {
 
 			@Override
 			public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-//				ProductCategory productCategory = dataSnapshot.getValue(ProductCategory.class);
-//				map.put(dataSnapshot.getKey(), productCategory);
+				//TODO needed?
 			}
 
 			@Override

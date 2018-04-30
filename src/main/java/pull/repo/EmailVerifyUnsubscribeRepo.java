@@ -38,8 +38,6 @@ public class EmailVerifyUnsubscribeRepo {
 
 			@Override
 			public void onCancelled(DatabaseError dataSnapshot) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
@@ -49,20 +47,14 @@ public class EmailVerifyUnsubscribeRepo {
 
 			@Override
 			public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void onChildRemoved(DataSnapshot dataSnapshot) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 	}

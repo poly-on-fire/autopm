@@ -40,7 +40,7 @@ public class EmailMetaRepo {
 
 			@Override
 			public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-				EmailMeta emailMeta = dataSnapshot.getValue(EmailMeta.class);
+//				TODO: is there a chance that this would ever change once created?
 			}
 
 			@Override

@@ -26,6 +26,7 @@ public class RoleRepo {
 		roleRef.addChildEventListener(new ChildEventListener() {
 			@Override
 			public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+				//TODO why do I even have this repo? This listener? why do I even care?
 				//wrong! errors out
 //				Role role = dataSnapshot.getValue(Role.class);
 			}

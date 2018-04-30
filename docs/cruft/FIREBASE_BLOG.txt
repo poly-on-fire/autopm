@@ -1,3 +1,4 @@
+Notes to self - entirely useless to anyone else
 This is opening as a note to Cameron
 
 - there is a reason for [Martin] being so ... about CQRS
