@@ -133,9 +133,9 @@ public class AppConfig implements ApplicationContextAware {
 				main.addRouteBuilder(new DevSeedRoutes(ctx));
 			}
 //			TODO this could also be parameterized and make it much easier to work with at startup
-//			/*
-//			 * Attempting to figure out when beans are written
-//			 */
+			/*
+			 * Attempting to figure out when beans are written
+			 */
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
 			for (String beanName : beanNames) {

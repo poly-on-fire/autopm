@@ -18,10 +18,10 @@ The idea is to prove out an approach or component in the simplest project first,
 Unlike other *poly-on-fire* projects, autopm is not a client written in Polymer, but a back end server written in Java.
 It uses the [Spring Boot](https://projects.spring.io/spring-boot/) and [Apache Camel](http://camel.apache.org/) stacks, in addition to the Firebase Admin SDK.
 
-Autopm runs on a server and listens for database changes to respond to. Things that it does on such a change are many, 
+Autopm runs on a server and listens for database changes to respond to. Things that it does on such a change are many,
 but include these functions:
 
-* Generating HTML pages and 
+* Generating HTML pages and
 * Listening to file system changes and deploying html to a sibling firebase hosting project
 * Firing off a daily email run to selected recipients on selected topics
 * Misc admin such as responding to promotion requests
@@ -29,9 +29,10 @@ but include these functions:
 
 ## Here is what it looks like when it is running
 
-[youtube demo](blah)
+[youtube demo](https://youtu.be/pyC_NFWxVSA)
 
-blah
+This video walks you through the relationship between front and back ends and
+covers the primary functions of the back end codebase.
 
 ## How I Install and Run It
 
@@ -46,7 +47,7 @@ java -jar target/autopm.jar
 
 ## Pre-requirements
 
-You will need to have maven, java, and nvm installed, or else modify refresh_npm.sh accordingly to use your current version of npm. 
+You will need to have maven, java, and nvm installed, or else modify refresh_npm.sh accordingly to use your current version of npm.
 Before you run the above maven and jar commands, you also need to have the appropriate firebase hosting project running in a sibling folder, for the generated html files to be able to deploy properly.
 Then, you run this script from the autopm folder, to initialize the sibling folder.
 
