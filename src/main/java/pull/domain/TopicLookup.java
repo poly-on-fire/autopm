@@ -8,4 +8,6 @@ public class TopicLookup {
 	public boolean listed;
 	public String name;
 	public String descripton;
+	public String link;
+	public String topicKey;
 }
