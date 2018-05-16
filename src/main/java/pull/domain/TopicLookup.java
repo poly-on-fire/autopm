@@ -5,4 +5,7 @@ public class TopicLookup {
 	public String sponsorName;
 	public String sponsorKey;
 	public long typeIndex;
+	public boolean listed;
+	public String name;
+	public String descripton;
 }
