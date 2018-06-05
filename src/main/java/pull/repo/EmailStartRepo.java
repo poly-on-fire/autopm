@@ -59,6 +59,9 @@ public class EmailStartRepo {
         });
     }
 
+    /*
+    It appears as if this is the entry point into the daily email functionality, right here
+     */
     private void addEmailTopicDates(DataSnapshot dataSnapshot) {
         EmailStart emailStart = dataSnapshot.getValue(EmailStart.class);
         if (!UnsubscribeLogRepo.contains(emailStart.getEmailAddress())) {

@@ -4,7 +4,7 @@ public class TopicDay {
 
 	private String topicKey;
 	private int day;
-	private String emailKey;
+	private String emailKey; //the path to the emailMeta record
 
 	public TopicDay() {
 		super();
