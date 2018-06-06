@@ -90,9 +90,9 @@ public class EmailLogRepo {
 	}
 
 	private void writeAndDelete(EmailLog emailLog, String key) {
-		Db.coRef("emailStart").push()
+		Db.coRef("emailStart").child(emailLog.getTopicKey() +":"+emailLog.getEmailAddress())
 				.setValue(new EmailStart(emailLog.getEmailAddress(), emailLog.getTopicKey(), yymmdd(), null));
-		Db.coRef("topicSignup").push().setValue(
+		Db.coRef("topicSignup").child(emailLog.getTopicKey() +":"+emailLog.getEmailAddress()).setValue(
 				new TopicSignup(emailLog.getEmailAddress(), emailLog.getTopicKey(), true, new Date().getTime()));
 		delete(key);
 	}

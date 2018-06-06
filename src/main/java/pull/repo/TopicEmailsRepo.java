@@ -74,10 +74,10 @@ public class TopicEmailsRepo {
 		}
 		String[] emails = topicEmails.getEmails().split(",");
 		for (String email : emails) {
-			Db.coRef("emailStart").push().setValue(new EmailStart(email, topicEmails.getMySpecificTopic(),
+			Db.coRef("emailStart").child(topicEmails.getMySpecificTopic() +":"+email).setValue(new EmailStart(email, topicEmails.getMySpecificTopic(),
 					StringUtils_.yyMMdd(new Date()), null));
-			Db.coRef("topicSignup").push().setValue(new TopicSignup(email, topicEmails.getMySpecificTopic(),
-					true, new Date().getTime(), topicEmails.getGroupName()));
+//			Db.coRef("topicSignup").child(topicEmails.getMySpecificTopic() +":"+email).setValue(new TopicSignup(email, topicEmails.getMySpecificTopic(),
+//					true, new Date().getTime(), topicEmails.getGroupName()));
 			;
 		}
 	}
