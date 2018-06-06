@@ -19,6 +19,7 @@ import pull.domain.EmailLog;
 import pull.domain.EmailStart;
 import pull.service.SendEmailVerifyEmail;
 import pull.util.Db;
+import pull.util.EmailAsPathReady;
 
 @Service
 public class EmailLogRepo {
@@ -90,9 +91,10 @@ public class EmailLogRepo {
 	}
 
 	private void writeAndDelete(EmailLog emailLog, String key) {
-		Db.coRef("emailStart").child(emailLog.getTopicKey() +":"+emailLog.getEmailAddress())
+		String compoundKey = emailLog.getTopicKey() +";"+EmailAsPathReady.convert(emailLog.getEmailAddress());
+		Db.coRef("emailStart").child(compoundKey)
 				.setValue(new EmailStart(emailLog.getEmailAddress(), emailLog.getTopicKey(), yymmdd(), null));
-		Db.coRef("topicSignup").child(emailLog.getTopicKey() +":"+emailLog.getEmailAddress()).setValue(
+		Db.coRef("topicSignup").child(compoundKey).setValue(
 				new TopicSignup(emailLog.getEmailAddress(), emailLog.getTopicKey(), true, new Date().getTime()));
 		delete(key);
 	}

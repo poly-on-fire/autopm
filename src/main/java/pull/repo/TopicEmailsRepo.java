@@ -17,6 +17,7 @@ import pull.domain.TopicSignup;
 import pull.domain.EmailStart;
 import pull.service.NewTopicEmailsRequest;
 import pull.util.Db;
+import pull.util.EmailAsPathReady;
 
 public class TopicEmailsRepo {
 	private DatabaseReference topicEmailsRef;
@@ -74,7 +75,7 @@ public class TopicEmailsRepo {
 		}
 		String[] emails = topicEmails.getEmails().split(",");
 		for (String email : emails) {
-			Db.coRef("emailStart").child(topicEmails.getMySpecificTopic() +":"+email).setValue(new EmailStart(email, topicEmails.getMySpecificTopic(),
+			Db.coRef("emailStart").child(topicEmails.getMySpecificTopic() +":"+EmailAsPathReady.convert(email)).setValue(new EmailStart(email, topicEmails.getMySpecificTopic(),
 					StringUtils_.yyMMdd(new Date()), null));
 //			Db.coRef("topicSignup").child(topicEmails.getMySpecificTopic() +":"+email).setValue(new TopicSignup(email, topicEmails.getMySpecificTopic(),
 //					true, new Date().getTime(), topicEmails.getGroupName()));
