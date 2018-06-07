@@ -14,7 +14,7 @@ import java.util.*;
 @Service
 public class TopicDayService {
     /*
-     * How does this class work? Two main things
+     * How does this class work? By creating in memory maps of the main two raw ingredients for a daily emial
      *
      * 1. When a day's email is added to a topic EmailMetaRepo calls this and topicDaysMap is increased by one, in memory.
      *
@@ -23,39 +23,38 @@ public class TopicDayService {
      * So the two above happen at app load time, and every time either is added
      * during usage. So now we have two in-memory maps, for better or worse.
      *
+     * THEN: WHEN IT"S TIME TO DO THE DAILY:
      * When DailyEmailRoutes runs it calls DailyEmail.send() which loops through the emailStartMap referenced above,
      * and sends out whatever email is appropriate for this day.
+     * To do this, it calls the todaysEmail() method with any emailStart, and today's date
      *
-     * To understand below you're going to need this: an emailKey starts out like this:
-     * /users/wdjLhZgkhuRZzzWB9khVIexF51L2/emailMeta/-LBSOptlX7dL82H8VRdQ
-     *
-     * One primary purpose of this class is to only retain and return the latest,
-     * correct version of days for each topic. Thus, it must automagically dedupe
-     * all TopicDay classes inserted, and only maintain the latest version in
-     * global memory. For example, and most importantly, if two subsequent
-     * topicDay instances had the same topic and emailKey paths, but different
-     * days, this class would only know about the latest version inserted.
-     *
-     * If you are reading this and at first confused with what appears to be a kind
-     * of dual usage of the emailKey, you might wish to understand that this
-     * variable has two purposes. One purpose is as a return value - every
-     * TopicDay instance is consumed by associating a specific day with a
-     * specific return value, in this case the db path to the emailMeta. But this
-     * same value is also used internally to dedupe each incoming TopicDay
-     * instance. So the emailKey (db path) is also used internally as a map key, but
-     * only a substring of that path is required for uniqueness. Kinda confusing,
-     * eh? Simple, though.
+     * There is also something slightly confusing in the stuff below, called the emailKey
+     * This is a really confusing name, but really what it is the path to emailMeta.
+     * Looks like this:
+     * /users/wdjLhZgkhuRZzzWB9khVIexF51L2/emailMeta/-LBSOptlX7dL82H8VRdQ_003
+     * The reason we handle this guy is that EmailOut needs it to look up emailContent by this path, slightly modified
+     * search for this to understand more 'path = path.replaceAll("emailMeta", "emailContent");'
      */
     public TopicDayService() {
         super();
     }
-
+    // outer map by topicKey, inner map by day
     Map<String, Map<String, TopicDay>> topicDaysMap = new HashMap<String, Map<String, TopicDay>>();
     private Map<String, EmailStart> emailStartMap = new HashMap<String, EmailStart>();
 
+
     /*
-    It appears as if this is the entry point into the daily email functionality, right here
+    See #1 above called from repo at setup and any add
      */
+    public void upsertEmailMeta(String path, EmailMeta emailMeta) {
+        // stashes it in a hashtable by path
+        // one hashtable per topic
+        TopicDay topicDay = new TopicDay(emailMeta.getTopicKey(), emailMeta.getDay(), ""+emailMeta.getDay());
+        feedDay(topicDay);
+        System.out.println("_");
+    }
+
+    /*  See #2 above called from repo at setup and any add  */
     public void upsertEmailStart(EmailStart emailStart) {
         String key = emailStart.getTopicKey() + emailStart.getEmailAddress();
         emailStartMap.put(key, emailStart);
@@ -63,22 +62,15 @@ public class TopicDayService {
          * Save this sysout for confidence building measure when you get lost and doubt
          * that it works Since testing is so far, a shit show
          */
-        System.err.println("EMAIL START " + emailStart.getDate() + " " + emailStart.getTopicKey() + " " + emailStart.getEmailAddress());
-    }
-
-    public void upsertEmailMeta(String path, EmailMeta emailMeta) {
-        // stashes it in a hashtable by path
-        // one hashtable per topic
-        TopicDay topicDay = new TopicDay(emailMeta.getTopicKey(), emailMeta.getDay(), path);
-        feedDay(topicDay);
-    }
-
-    public List<EmailOut> whatComingDays(EmailStart emailStart, LocalDate thisDate) {
-        return dayRange(emailStart, false, thisDate);
+//        System.err.println("EMAIL START " + emailStart.getDate() + " " + emailStart.getTopicKey() + " " + emailStart.getEmailAddress());
     }
 
     public List<EmailOut> todaysEmail(EmailStart emailStart, LocalDate thisDate) {
         return dayRange(emailStart, true, thisDate);
+    }
+
+    public List<EmailOut> whatComingDays(EmailStart emailStart, LocalDate thisDate) {
+        return dayRange(emailStart, false, thisDate);
     }
 
     public Map<String, EmailStart> getEmailStarts() {
@@ -135,11 +127,11 @@ public class TopicDayService {
     }
 
     void feedDay(TopicDay topicDay) {
-        String key = topicDay.getEmailKey().substring(20, topicDay.getEmailKey().length());
         Map<String, TopicDay> topicDayMap = fetchTopicDayMap(topicDay.getTopicKey());
-        topicDayMap.put(key, topicDay);
+        topicDayMap.put(""+topicDay.getDay(), topicDay);
         topicDaysMap.put(topicDay.getTopicKey(), topicDayMap);
-        System.err.println("TOPIC DAY " + topicDay.getTopicKey() + " " + topicDayMap.size() + " " + topicDay.getDay() + " " + topicDay.getEmailKey());
+        System.err.println("TOPIC DAY "  + topicDay.getTopicKey() + " " + topicDayMap.size() + " " + topicDay.getDay() + " " + topicDay.getEmailKey());
+        printTopicDaysMap();
     }
 
     Map<String, TopicDay> fetchTopicDayMap(String topicKey) {
@@ -159,9 +151,9 @@ public class TopicDayService {
      *
      */
     public void printTopicDaysMap() {
-        System.err.println("TOPIC KEYS HAS " + topicDaysMap.size());
+        System.err.println("\tTOPIC KEYS HAS " + topicDaysMap.size());
         for (String value : topicDaysMap.keySet()) {
-            System.err.println("TOPIC KEY " + value);
+            System.err.println("\t\tTOPIC KEY " + value);
         }
 
     }
