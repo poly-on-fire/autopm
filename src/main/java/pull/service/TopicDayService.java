@@ -14,7 +14,8 @@ import java.util.*;
 @Service
 public class TopicDayService {
     /*
-     * How does this class work? By creating in memory maps of the main two raw ingredients for a daily emial
+     * How does this class work? By creating in memory maps of the main two raw ingredients for a daily email,
+     * and then a single access point for emails that go out today per emailStart.
      *
      * 1. When a day's email is added to a topic EmailMetaRepo calls this and topicDaysMap is increased by one, in memory.
      *
@@ -47,11 +48,8 @@ public class TopicDayService {
     See #1 above called from repo at setup and any add
      */
     public void upsertEmailMeta(String path, EmailMeta emailMeta) {
-        // stashes it in a hashtable by path
-        // one hashtable per topic
         TopicDay topicDay = new TopicDay(emailMeta.getTopicKey(), emailMeta.getDay(), ""+emailMeta.getDay());
         feedDay(topicDay);
-        System.out.println("_");
     }
 
     /*  See #2 above called from repo at setup and any add  */
@@ -130,8 +128,8 @@ public class TopicDayService {
         Map<String, TopicDay> topicDayMap = fetchTopicDayMap(topicDay.getTopicKey());
         topicDayMap.put(""+topicDay.getDay(), topicDay);
         topicDaysMap.put(topicDay.getTopicKey(), topicDayMap);
-        System.err.println("TOPIC DAY "  + topicDay.getTopicKey() + " " + topicDayMap.size() + " " + topicDay.getDay() + " " + topicDay.getEmailKey());
-        printTopicDaysMap();
+//        System.err.println("TOPIC DAY "  + topicDay.getTopicKey() + " " + topicDayMap.size() + " " + topicDay.getDay() + " " + topicDay.getEmailKey());
+//        printTopicDaysMap();
     }
 
     Map<String, TopicDay> fetchTopicDayMap(String topicKey) {
