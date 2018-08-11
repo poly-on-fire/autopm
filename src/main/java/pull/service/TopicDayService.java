@@ -14,17 +14,19 @@ import java.util.*;
 @Service
 public class TopicDayService {
     /*
-     * How does this class work? By creating in memory maps of the main two raw ingredients for a daily email,
-     * and then a single access point for emails that go out today per emailStart.
+     * How does this class work? By creating in memory maps of the main two raw ingredients in the background,
+     * and then providing a single access point for emails that go out today, per emailStart.
      *
-     * 1. When a day's email is added to a topic EmailMetaRepo calls this and topicDaysMap is increased by one, in memory.
+     * This class says to the rest of the app: "Hey while you were churning away doing your thing,
+     * I was building an in memory version of two different maps that I could use to instantly grind out an email list."
+     *
+     * The two maps are
+     *
+     * 1. When a day's email is added to a topic, EmailMetaRepo calls this and topicDaysMap is increased by one.
      *
      * 2. When an EmailStart is added, EmailStartRepo calls this and emailStartMap is increased by one, in memory
      *
-     * So the two above happen at app load time, and every time either is added
-     * during usage. So now we have two in-memory maps, for better or worse.
-     *
-     * THEN: WHEN IT"S TIME TO DO THE DAILY:
+     * THEN: WHEN IT"S TIME TO SEND EMAILS:
      * When DailyEmailRoutes runs it calls DailyEmail.send() which loops through the emailStartMap referenced above,
      * and sends out whatever email is appropriate for this day.
      * To do this, it calls the todaysEmail() method with any emailStart, and today's date

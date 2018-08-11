@@ -94,6 +94,7 @@ public class EmailLogRepo {
 		String compoundKey = emailLog.getTopicKey() +";"+EmailAsPathReady.convert(emailLog.getEmailAddress());
 		Db.coRef("emailStart").child(compoundKey)
 				.setValue(new EmailStart(emailLog.getEmailAddress(), emailLog.getTopicKey(), yymmdd(), null));
+		//for lack of explanation elsewhere topicSignup seems to be for later unsubscribe lookup?
 		Db.coRef("topicSignup").child(compoundKey).setValue(
 				new TopicSignup(emailLog.getEmailAddress(), emailLog.getTopicKey(), true, new Date().getTime()));
 		delete(key);
