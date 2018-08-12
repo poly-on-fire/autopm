@@ -40,12 +40,12 @@ public class DailyEmail {
         /* so this next line gets a de-duped list, that's about it*/
         Collection<EmailStart> emailStarts = (Collection<EmailStart>) topicDayService.getEmailStarts().values();
         for (EmailStart emailStart : emailStarts) {
-            System.out.println("\tSTART  "+ emailStart.getEmailAddress());
+//            System.out.println("\tSTART  "+ emailStart.getEmailAddress());
             List<EmailOut> emailsOut = topicDayService.todaysEmail(emailStart, LocalDate.now());
-            System.out.println("\tOUTS  "+ emailsOut);
+//            System.out.println("\tOUTS  "+ emailsOut);
             for (EmailOut emailOut : emailsOut) {
-//                new FetchSendEmailRepo(emailFrom, emailOut, emailStart, sendEmail);
-                System.out.println(" emailOut emailStart.emailAddress  "+ emailOut + " " + emailOut.getEmailAddress());
+                new FetchSendEmailRepo(emailFrom, emailOut, emailStart, sendEmail);
+//                System.out.println(" emailOut emailStart.emailAddress  "+ emailOut + " " + emailOut.getEmailAddress());
             }
 
         }
