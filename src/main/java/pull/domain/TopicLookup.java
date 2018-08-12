@@ -7,7 +7,7 @@ public class TopicLookup {
 	public long typeIndex;
 	public boolean listed;
 	public String name;
-	public String descripton;
+	public String description;
 	public String link;
 	public String topicKey;
 }
