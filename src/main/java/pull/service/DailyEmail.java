@@ -44,7 +44,7 @@ public class DailyEmail {
             List<EmailOut> emailsOut = topicDayService.todaysEmail(emailStart, LocalDate.now());
 //            System.out.println("\tOUTS  "+ emailsOut);
             for (EmailOut emailOut : emailsOut) {
-                new FetchSendEmailRepo(emailFrom, emailOut, emailStart, sendEmail);
+//                new FetchSendEmailRepo(emailFrom, emailOut, emailStart, sendEmail);
 //                System.out.println(" emailOut emailStart.emailAddress  "+ emailOut + " " + emailOut.getEmailAddress());
             }
 

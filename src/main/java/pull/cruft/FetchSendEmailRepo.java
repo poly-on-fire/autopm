@@ -28,6 +28,7 @@ public class FetchSendEmailRepo {
         this.sendEmail = sendEmail;
         this.emailStart = emailStart;
         emailContentRef = Db.coRef(cleanPath(emailOut));
+        System.out.println("WHAT IS HERE? \n"+emailContentRef);
         init();
     }
 
