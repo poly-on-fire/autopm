@@ -36,10 +36,11 @@ public class DailyEmail {
          * NEVER OK to have more than one email per topic per email address,
          * it is still physically possible, so that is what has to be done.
          */
-        topicDayService.printTopicDaysMap();
+//        topicDayService.printTopicDaysMap();
         /* so this next line gets a de-duped list, that's about it*/
         Collection<EmailStart> emailStarts = (Collection<EmailStart>) topicDayService.getEmailStarts().values();
         for (EmailStart emailStart : emailStarts) {
+            System.out.println("\tSTART  "+ emailStart.getEmailAddress());
             List<EmailOut> emailsOut = topicDayService.todaysEmail(emailStart, LocalDate.now());
             for (EmailOut emailOut : emailsOut) {
 //                new FetchSendEmailRepo(emailFrom, emailOut, emailStart, sendEmail);
