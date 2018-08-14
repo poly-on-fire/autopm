@@ -47,7 +47,7 @@ public class TopicDayService {
 
 
     /*
-    See #1 above called from repo at setup and any add
+    See #1 above called from repo at setup and any add - still uses path
      */
     public void upsertEmailMeta(String path, EmailMeta emailMeta) {
         TopicDay topicDay = new TopicDay(emailMeta.getTopicKey(), emailMeta.getDay(), ""+emailMeta.getDay());
