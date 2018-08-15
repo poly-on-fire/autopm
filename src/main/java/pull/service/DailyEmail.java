@@ -45,7 +45,7 @@ public class DailyEmail {
 //            System.out.println("\tOUTS  "+ emailsOut);
             for (EmailOut emailOut : emailsOut) {
                 new FetchSendEmailRepo(emailFrom, emailOut, emailStart, sendEmail);
-//                System.out.println(" emailOut emailStart.emailAddress  "+ emailOut + " " + emailOut.getEmailAddress());
+                System.out.println(" emailOut emailStart.emailAddress  "+ emailOut + " " + emailOut.getEmailAddress());
             }
 
         }
