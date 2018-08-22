@@ -20,6 +20,6 @@ public class SMSService {
         Message message = Message.creator(new PhoneNumber(to),
                 new PhoneNumber(TWILIO_PHONE_NUMBER),body).create();
         //TODO log or write to db
-        System.out.println(message.getSid());
+//        System.out.println(message.getSid());
     }
 }

@@ -20,18 +20,18 @@ public class TopicDayService {
      * This class says to the rest of the app: "Hey while you were churning away doing your thing,
      * I was building an in memory version of two different maps that I could use to instantly grind out an email list."
      *
-     * The two maps are
+     * The two in memory maps are
      *
-     * 1. When a day's email is added to a topic, EmailMetaRepo calls this and topicDaysMap is increased by one.
+     * 1. When a day's email is added to a topic, EmailMetaRepo calls this and topicDaysMap is increased by that one.
      *
-     * 2. When an EmailStart is added, EmailStartRepo calls this and emailStartMap is increased by one, in memory
+     * 2. When an EmailStart is added, EmailStartRepo calls this and emailStartMap is increased by one
      *
      * THEN: WHEN IT"S TIME TO SEND EMAILS:
      * When DailyEmailRoutes runs it calls DailyEmail.send() which loops through the emailStartMap referenced above,
      * and sends out whatever email is appropriate for this day.
      * To do this, it calls the todaysEmail() method with any emailStart, and today's date
      *
-     * There is also something slightly confusing in the stuff below, called the emailKey
+     * There is also something modestly confusing in the stuff below, called the emailKey
      * This is a really confusing name, but really what it is the path to emailMeta.
      * Looks like this:
      * /users/wdjLhZgkhuRZzzWB9khVIexF51L2/emailMeta/-LBSOptlX7dL82H8VRdQ_003
@@ -50,7 +50,7 @@ public class TopicDayService {
     See #1 above called from repo at setup and any add - still uses path
      */
     public void upsertEmailMeta(String path, EmailMeta emailMeta) {
-        TopicDay topicDay = new TopicDay(emailMeta.getTopicKey(), emailMeta.getDay(), ""+emailMeta.getDay());
+        TopicDay topicDay = new TopicDay(emailMeta.getTopicKey(), emailMeta.getDay(), path);
         feedDay(topicDay);
     }
 

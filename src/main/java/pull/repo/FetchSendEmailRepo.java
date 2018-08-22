@@ -1,4 +1,4 @@
-package pull.cruft;
+package pull.repo;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +28,6 @@ public class FetchSendEmailRepo {
         this.sendEmail = sendEmail;
         this.emailStart = emailStart;
         emailContentRef = Db.coRef(cleanPath(emailOut));
-        System.out.println("WHAT IS HERE? \n"+emailContentRef);
         init();
     }
 
@@ -50,8 +49,6 @@ public class FetchSendEmailRepo {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 EmailContent emailContent = dataSnapshot.getValue(EmailContent.class);
-                System.err.println(emailFrom + System.getenv("EMAIL_FROM_NAME") + " " + emailStart.getEmailAddress() + " "
-                        + emailContent.getEmailBody() + " " + emailContent.getSubject());
                 try {
                     sendEmail.go(emailFrom, System.getenv("EMAIL_FROM_NAME"), emailStart.getEmailAddress(),
                             emailContent.getEmailBody(), emailContent.getSubject());
