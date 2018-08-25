@@ -28,8 +28,9 @@ public class SendEmail {
         email.setSSLOnConnect(true);
         email.setFrom(fromEmail, fromName);
         email.setSubject(subject);
-        email.setHtmlMsg(msg);
-        email.setTextMsg("Your email client does not support HTML messages");
+//        email.setHtmlMsg(msg);
+        email.setTextMsg(msg);
+//        email.setTextMsg("Your email client does not support HTML messages"); What is this?
         email.addTo(to);
         email.send();
     }
@@ -46,8 +47,9 @@ public class SendEmail {
         email.setSSLOnConnect(true);
         email.setFrom(fromEmail, fromName);
         email.setSubject(subject);
-        email.setHtmlMsg(msg);
-        email.setTextMsg("Your email client does not support HTML messages");
+//        email.setHtmlMsg(msg);
+        email.setTextMsg(msg);
+//        email.setTextMsg("Your email client does not support HTML messages"); What is this?
         email.setReplyTo(replyTos);
         email.addTo(to);
         email.send();
