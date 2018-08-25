@@ -50,7 +50,7 @@ public class FetchSendEmailRepo {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 EmailContent emailContent = dataSnapshot.getValue(EmailContent.class);
                 try {
-                    sendEmail.go(emailFrom, System.getenv("EMAIL_FROM_NAME"), emailStart.getEmailAddress(),
+                    sendEmail.go(emailFrom, "PullModel Subscription", emailStart.getEmailAddress(),
                             emailContent.getEmailBody(), emailContent.getSubject());
                 } catch (Exception e) {
                     //TODO real error handling
